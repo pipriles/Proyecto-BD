@@ -19,6 +19,8 @@ public class Model {
     /* Establece la conexion con la BD */
     public boolean connect(String bd, String usuario, String contrasena) {
         
+        boolean re = false;
+        
         try {
             String driverName = "org.postgresql.Driver";
             String url = "jdbc:postgresql://localhost:5432/" + bd;
@@ -29,13 +31,18 @@ public class Model {
                 System.out.print("Conexion Establecida con Exito");
             
             this.connection = conn;
-            return true;
+            re = true;
+        }
+        
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return re;
     }
 
     /* Cierra la conexion a la BD */

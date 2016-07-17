@@ -5,19 +5,20 @@
 
 public class Home {
 
-	private Home instance = null;
-	public Model model;
-	public Gui gui;
+	private static Home instance = null;
+	public static Model model;
+	public static Gui gui;
 
 	private Home() {}
 
 	public static void main(String[] args) {
-		this.model = new Model(getInstance());
-		this.gui = new Gui(getInstance());
+		model = new Model(getInstance());
+		gui = new Gui(getInstance());
+		gui.setVisible(true);
 	}
 
 	public static Home getInstance() {
-		if(instance == null) instance = this;
+		if(instance == null) instance = new Home();
 		return instance;
 	}
 }

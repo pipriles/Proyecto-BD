@@ -37,13 +37,14 @@ public class Gui extends JFrame implements ActionListener
 
 	/*************************************************************/
 
+	public Home base;
+
 	public static final int W_WIDTH  = 800;
 	public static final int W_HEIGHT = 500;
 
 	/* Constructor */
 	public Gui(Home base) {
-		this.base;
-		this.setVisible(true);	// Warning
+		this.base = base;
 		inicio();
 	}
 
@@ -127,7 +128,9 @@ public class Gui extends JFrame implements ActionListener
 		repaint();
 	}
 
-	
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("Detect!");
+	}
 
 
 
@@ -136,13 +139,13 @@ public class Gui extends JFrame implements ActionListener
 
 
 
-
+	/*
 	ResultSet Conexion(String sql)
 	{
 		ResultSet x = null;
 		Connection conexion;
-		ConexionBD con;
-		con = new ConexionBD();
+		Model con;
+		con = new Model();
 
 		try
 		{
@@ -163,8 +166,8 @@ public class Gui extends JFrame implements ActionListener
 	void borrar (String sql)
 	{
 		Connection conexion;
-		ConexionBD con;
-		con = new ConexionBD();
+		Model con;
+		con = new Model();
 		try
 		{
 			conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
@@ -181,8 +184,8 @@ public class Gui extends JFrame implements ActionListener
 	void guardar (String sql)
 	{
 		Connection conexion;
-		ConexionBD con;
-		con = new ConexionBD();
+		Model con;
+		con = new Model();
 		try
 		{
 			conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
@@ -1091,8 +1094,7 @@ public class Gui extends JFrame implements ActionListener
 		eliminar.addActionListener(this);
 	}
 
-  public void actionPerformed(ActionEvent e)
-  {
+	public void actionPerformed(ActionEvent e) {
     String u = user.getText();
 		String p = pas.getText();
 
@@ -2072,4 +2074,5 @@ public class Gui extends JFrame implements ActionListener
 
 
   }
+  */
 }
