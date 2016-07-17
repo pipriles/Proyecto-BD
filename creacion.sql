@@ -1,10 +1,6 @@
 /* Creacion de Usuarios que Podran Utilizar la Base de datos*/
-CREATE USER Administrador PASSWORD '12345';
-CREATE USER Trabajador PASSWORD '123';
-
-/*** CREACION DE LA BASE DE DATOS ***/
- /*http://kb.deister.net/index.php/Database_Roles_and_Privileges*/
-CREATE DATABASE proyecto_bd TEMPLATE template1;
+CREATE ROLE Administrador NOSUPERUSER;
+CREATE ROLE Trabajador NOSUPERUSER;
 
 /*** CREACION DE LA BASE DE DATOS ***/
 
@@ -45,7 +41,7 @@ CREATE TABLE p.evento(
 	PRIMARY KEY (organizador, nombre, anho, participante)
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.evento TO Administrador;
+GRANT ALL ON TABLE p.evento TO Administrador;
 GRANT SELECT ON TABLE p.evento TO Trabajador;
 
 CREATE TABLE p.producto (
@@ -56,7 +52,7 @@ CREATE TABLE p.producto (
 	tipo p.tipo_producto NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.producto TO Administrador;
+GRANT ALL ON TABLE p.producto TO Administrador;
 GRANT SELECT ON TABLE p.producto TO Trabajador;
 
 CREATE TABLE p.maquinaria (
@@ -65,7 +61,7 @@ CREATE TABLE p.maquinaria (
 	pais varchar(60) NOT NULL 
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.maquinaria TO Administrador;
+GRANT ALL ON TABLE p.maquinaria TO Administrador;
 GRANT SELECT ON TABLE p.maquinaria TO Trabajador;
 
 CREATE TABLE p.etapa
@@ -79,7 +75,7 @@ CREATE TABLE p.etapa
 	costo p.tipo_numerico NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.etapa TO Administrador;
+GRANT ALL ON TABLE p.etapa TO Administrador;
 GRANT SELECT ON TABLE p.etapa TO Trabajador;
 
 CREATE TABLE p.empresa
@@ -92,7 +88,7 @@ CREATE TABLE p.empresa
 	estado varchar(30) NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.empresa TO Administrador;
+GRANT ALL ON TABLE p.empresa TO Administrador;
 GRANT SELECT ON TABLE p.empresa TO Trabajador;
 
 CREATE TABLE p.persona
@@ -102,7 +98,7 @@ CREATE TABLE p.persona
 	fecha_nacimiento date NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.persona TO Administrador;
+GRANT ALL ON TABLE p.persona TO Administrador;
 GRANT SELECT ON TABLE p.persona TO Trabajador;
 
 /*** TABLAS SECUNDARIAS ***/
@@ -116,7 +112,7 @@ CREATE TABLE p.encargo
 	ruta varchar(100) NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.encargo TO Administrador;
+GRANT ALL ON TABLE p.encargo TO Administrador;
 GRANT SELECT ON TABLE p.encargo TO Trabajador;
 
 CREATE TABLE p.trabajador
@@ -138,7 +134,7 @@ CREATE TABLE p.trabajador
 		ON DELETE CASCADE*/
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.trabajador TO Administrador;
+GRANT ALL ON TABLE p.trabajador TO Administrador;
 GRANT SELECT ON TABLE p.trabajador TO Trabajador;
 
 
@@ -152,7 +148,7 @@ CREATE TABLE p.estudiante(
 		ON DELETE CASCADE*/
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.estudiante TO Administrador;
+GRANT ALL ON TABLE p.estudiante TO Administrador;
 GRANT SELECT ON TABLE p.estudiante TO Trabajador;
 
 CREATE TABLE p.premio_conc (
@@ -171,7 +167,7 @@ CREATE TABLE p.premio_conc (
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.premio_conc TO Administrador;
+GRANT ALL ON TABLE p.premio_conc TO Administrador;
 GRANT SELECT ON TABLE p.premio_conc TO Trabajador;
  
 CREATE TABLE p.concursa (
@@ -189,7 +185,7 @@ CREATE TABLE p.concursa (
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.concursa TO Administrador;
+GRANT ALL ON TABLE p.concursa TO Administrador;
 GRANT SELECT ON TABLE p.concursa TO Trabajador;
 
 CREATE TABLE p.participante_ev (
@@ -203,7 +199,7 @@ CREATE TABLE p.participante_ev (
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.participante_ev TO Administrador;
+GRANT ALL ON TABLE p.participante_ev TO Administrador;
 GRANT SELECT ON TABLE p.participante_ev TO Trabajador;
 
 CREATE TABLE p.utiliza
@@ -216,7 +212,7 @@ CREATE TABLE p.utiliza
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.utiliza TO Administrador;
+GRANT ALL ON TABLE p.utiliza TO Administrador;
 GRANT SELECT ON TABLE p.utiliza TO Trabajador;
 
 CREATE TABLE p.procesa
@@ -237,7 +233,7 @@ CREATE TABLE p.procesa
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.procesa TO Administrador;
+GRANT ALL ON TABLE p.procesa TO Administrador;
 GRANT SELECT ON TABLE p.procesa TO Trabajador;
 
 /*ESTAS DOS TABLAS NO SON LA MISMA VAINA (procesa-usa) ??*/
@@ -255,7 +251,7 @@ CREATE TABLE p.usa
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.usa TO Administrador;
+GRANT ALL ON TABLE p.usa TO Administrador;
 GRANT SELECT ON TABLE p.usa TO Trabajador;
 
 CREATE TABLE p.envia
@@ -272,7 +268,7 @@ CREATE TABLE p.envia
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.envia TO Administrador;
+GRANT ALL ON TABLE p.envia TO Administrador;
 GRANT SELECT ON TABLE p.envia TO Trabajador;
 
 CREATE TABLE p.participa
@@ -288,7 +284,7 @@ CREATE TABLE p.participa
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.participa TO Administrador;
+GRANT ALL ON TABLE p.participa TO Administrador;
 GRANT SELECT ON TABLE p.participa TO Trabajador;
 
 CREATE TABLE p.funcion_part
@@ -305,7 +301,7 @@ CREATE TABLE p.funcion_part
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.funcion_part TO Administrador;
+GRANT ALL ON TABLE p.funcion_part TO Administrador;
 GRANT SELECT ON TABLE p.funcion_part TO Trabajador;
 
 CREATE TABLE p.labora
@@ -321,7 +317,7 @@ CREATE TABLE p.labora
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.labora TO Administrador;
+GRANT ALL ON TABLE p.labora TO Administrador;
 GRANT SELECT ON TABLE p.labora TO Trabajador;
 
 CREATE TABLE p.especialidad_maestro(
@@ -333,7 +329,7 @@ CREATE TABLE p.especialidad_maestro(
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.especialidad_maestro TO Administrador;
+GRANT ALL ON TABLE p.especialidad_maestro TO Administrador;
 GRANT SELECT ON TABLE p.especialidad_maestro TO Trabajador;
 
 CREATE TABLE p.curso(
@@ -346,7 +342,7 @@ CREATE TABLE p.curso(
 		ON DELETE CASCADE
 );	
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.curso TO Administrador;
+GRANT ALL ON TABLE p.curso TO Administrador;
 GRANT SELECT ON TABLE p.curso TO Trabajador;
 
 CREATE TABLE p.asiste(
@@ -358,7 +354,7 @@ CREATE TABLE p.asiste(
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.asiste TO Administrador;
+GRANT ALL ON TABLE p.asiste TO Administrador;
 GRANT SELECT ON TABLE p.asiste TO Trabajador;
 
 CREATE TABLE p.vende(
@@ -380,7 +376,7 @@ CREATE TABLE p.vende(
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.vende TO Administrador;
+GRANT ALL ON TABLE p.vende TO Administrador;
 GRANT SELECT ON TABLE p.vende TO Trabajador;
 
 CREATE TABLE p.necesita(
@@ -398,5 +394,5 @@ CREATE TABLE p.necesita(
 		ON DELETE CASCADE
 );
 /* Asignando los permisos necesarios a mis usuarios*/
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE p.necesita TO Administrador;
+GRANT ALL ON TABLE p.necesita TO Administrador;
 GRANT SELECT ON TABLE p.necesita TO Trabajador;

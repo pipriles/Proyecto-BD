@@ -28,75 +28,72 @@ public class newhome extends JFrame implements ActionListener
 	public String sql = "", sql2 = "", prueba;
 	JFrame ventana;
 
-  //Listas de opciones desplegables
-  String[] usertype = {"Administrador", "Trabajador"};
-  String[] opciones = {"Insertar", "Eliminar"};
-  String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
+	//Listas de opciones desplegables
+	String[] usertype = {"Administrador", "Trabajador"};
+	String[] opciones = {"Insertar", "Eliminar"};
+	String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
 	String[] tipos = {"Procesadora", "Chocolatera", "Tienda"};
-  String[] rifemp = {"abcd", "acdb", "bdgs"};
+	String[] rifemp = {"abcd", "acdb", "bdgs"};
 
-  ResultSet Conexion(String sql)
-  {
-    ResultSet x = null;
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
+	/***************************************************/
 
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","w95gio24");
-      Statement st;
-      st = conexion.createStatement();
-      ResultSet rs;
-      rs = st.executeQuery(sql);
-      x = rs;
-    }
-    catch(SQLException e)
-    {
-      JOptionPane.showMessageDialog (null, "Error: "+e.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
-    }
-    return x;
-  }
+	public static final String BD_NAME = "proyecto_bd";
+	public static final String BD_USER = "waldo";
+	public static final String BD_PASS = "1234";
 
-	void borrar (String sql)
-  {
+	ResultSet Conexion(String sql) {
+		Statement st;
+		ResultSet x = null;
+		Connection conexion;
+		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
 
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
-      Statement st;
-      st = conexion.createStatement();
-    	st.executeQuery(sql);
-    }
-    catch(SQLException e)
-    {
+		try {
+			con.connect();
+			conexion = con.getConnection();
+			st = conexion.createStatement();
+			x = st.executeQuery(sql);
+		}
+		catch(SQLException e) {
+	  		JOptionPane.showMessageDialog (null, "Error: " + e.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
+		}
+		return x;
+	}
+
+	void borrar(String sql) {
+		Statement st;
+		Connection conexion;
+		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
+
+		try {
+			con.connect();
+			conexion = con.getConnection();
+			st = conexion.createStatement();
+			st.executeQuery(sql);
+		}
+		catch(SQLException e) {
 			JOptionPane.showMessageDialog (null,"Eliminacion Correcta");
-    }
-  }
+		}
+  	}
 
-	void guardar (String sql)
-  {
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
-      Statement st;
-      st = conexion.createStatement();
-    	st.executeQuery(sql);
-    }
-    catch(SQLException e)
-    {
+	void guardar(String sql) {
+		Statement st;
+		Connection conexion;
+		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
+
+		try {
+			con.connect();
+	  		conexion = con.getConnection();
+			st = conexion.createStatement();
+			st.executeQuery(sql);
+		}
+		catch(SQLException e) {
 			JOptionPane.showMessageDialog (null,"Insercion Correcta");
-    }
-  }
+		}
+  	}
 
-  public static void main(String args[])
-	{
+  	/***************************************************/
+
+  	public static void main(String args[]) {
 		newhome ventana = new newhome();
 		ventana.setVisible(true);
 	}
@@ -1083,9 +1080,15 @@ public class newhome extends JFrame implements ActionListener
 		eliminar.addActionListener(this);
 	}
 
-  public void actionPerformed(ActionEvent e)
-  {
-    String u = user.getText();
+
+
+	/***********************************************/
+
+
+
+  	public void actionPerformed(ActionEvent e)
+  	{
+		String u = user.getText();
 		String p = pas.getText();
 
 		// elimina de una tabla
@@ -1096,91 +1099,92 @@ public class newhome extends JFrame implements ActionListener
 		}
 
 		/// salida del programa
-    if(e.getSource()==boton)
+	    if(e.getSource()==boton)
 			System.exit(0);
 
-	  //validacion de campos de inicio de sesion
-    if(e.getSource()== boton3)
-  	{
-  		if (u.equals("") && p.equals(""))
-  			JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de usuario y Contase\u00f1a");
-  		else
+	 	//validacion de campos de inicio de sesion
+    	if(e.getSource()== boton3)
   		{
-  			if(u.equals("")||u == null)
-  				JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre del usuario");
-  			else
-  			{
-  				if(p.equals("")||p == null)
-  					JOptionPane.showMessageDialog(rootPane, "Ingrese la contrase\u00f1a");
-  			}
+	  		if (u.equals("") && p.equals(""))
+	  			JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de usuario y Contase\u00f1a");
+	  		else
+	  		{
+	  			if(u.equals("")||u == null)
+	  				JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre del usuario");
+	  			else
+	  			{
+	  				if(p.equals("")||p == null)
+	  					JOptionPane.showMessageDialog(rootPane, "Ingrese la contrase\u00f1a");
+	  			}
+	  		}
   		}
-  	}
 
-		/// inicio como Administrador
-    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador"))
-  	{
-  		if(user.getText().equals("a") && pas.getText().equals("a"))
-  		{
-  			homeAdministrador();
-  			repaint();
-  		}
-  		else
-  		{
-  			if (!u.equals("") && !p.equals(""))
-  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
-  		}
-  	}
+	  	/**************************************/
+	  	/***** Inicio como administrador ******/
 
-		/// inicio como trabajador
-  	if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Trabajador"))
-  	{
-  		if(!u.equals("") && !p.equals(""))
-  		{
-  			homeTrabajador();
-  			repaint();
-  			}
+	    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador"))
+	  	{
+	  		if(user.getText().equals("a") && pas.getText().equals("a"))
+	  		{
+	  			homeAdministrador();
+	  			repaint();
+	  		}
+	  		else
+	  		{
+	  			if (!u.equals("") && !p.equals(""))
+	  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
+	  		}
+	  	}
+
+	  	/**************************************/
+	  	/****** Inicio como trabajador ********/
+
+	  	if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Trabajador")) {
+	  		if(!u.equals("") && !p.equals("")){
+				homeTrabajador();
+				repaint();
+			}
 		}
+
+		/**************************************/
 
     /// cierre de sesion
-    if(e.getSource() == boton2)
+    if(e.getSource() == boton2) {
+      	j.setVisible(false);
+		boton2.setVisible(false);
+		if(CmbUser_Type.getSelectedItem().equals("Administrador"))
 		{
-      j.setVisible(false);
-			boton2.setVisible(false);
-			if(CmbUser_Type.getSelectedItem().equals("Administrador"))
-			{
-				r1.setVisible(false);
-				r2.setVisible(false);
-				boton4.setVisible(false);
-			}
-      if(CmbUser_Type.getSelectedItem().equals("Trabajador"))
-			{
-
-				consulta1.setVisible(false);
-        consulta2.setVisible(false);
-        consulta3.setVisible(false);
-			}
-
-			setTitle("Inicio"); //coloca el nombre a la ventana
-			add(a);
-			a.setVisible(true);
-			add(x);
-			x.setVisible(true);
-			add(user);
-			user.setText(null);
-			user.setVisible(true);
-			add(y);
-			y.setVisible(true);
-			add(pas);
-			pas.setText(null);
-			pas.setVisible(true);
-			add(boton);
-			boton.setVisible(true);
-			add(boton3);
-			boton3.setVisible(true);
-			add(CmbUser_Type);
-			CmbUser_Type.setVisible(true);
-			repaint();
+			r1.setVisible(false);
+			r2.setVisible(false);
+			boton4.setVisible(false);
 		}
+      	if(CmbUser_Type.getSelectedItem().equals("Trabajador")) {
+			consulta1.setVisible(false);
+			consulta2.setVisible(false);
+			consulta3.setVisible(false);
+		}
+
+		setTitle("Inicio"); //coloca el nombre a la ventana
+		add(a);
+		a.setVisible(true);
+		add(x);
+		x.setVisible(true);
+		add(user);
+		user.setText(null);
+		user.setVisible(true);
+		add(y);
+		y.setVisible(true);
+		add(pas);
+		pas.setText(null);
+		pas.setVisible(true);
+		add(boton);
+		boton.setVisible(true);
+		add(boton3);
+		boton3.setVisible(true);
+		add(CmbUser_Type);
+		CmbUser_Type.setVisible(true);
+		repaint();
+	}
 
     /// continuar en la insercion o eliminacion
     if (e.getSource()== boton4)
