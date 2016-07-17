@@ -16,7 +16,6 @@ DROP TABLE p.premio_conc;
 DROP TABLE p.estudiante;
 DROP TABLE p.trabajador;
 
-
 DROP TABLE p.persona;
 DROP TABLE p.encargo;
 DROP TABLE p.empresa;

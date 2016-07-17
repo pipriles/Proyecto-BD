@@ -18,12 +18,9 @@ CREATE DATABASE proyecto_bd TEMPLATE template1;
 
 CREATE SCHEMA p;
 
-
 /* asignado permisos para la utilizacion del esquema*/
 GRANT USAGE ON SCHEMA p TO Trabajador;
 GRANT USAGE ON SCHEMA p TO Administrador;
-
-
 
 /*** CREACION DE LOS DOMINIOS ***/
 
