@@ -114,7 +114,7 @@ public class newhome extends JFrame implements ActionListener
 		//setOpacity(0.9f); //poner transparente la ventana
 	}
 
-  void inicio ()
+	void inicio ()
 	{
 		ventana();
 		contenedor = new Container();
@@ -128,70 +128,71 @@ public class newhome extends JFrame implements ActionListener
 			e.printStackTrace();
 		}
 
-		setTitle("--.Inicio.--"); ///coloca el nombre a la ventana
-		a= new JLabel ("Ingrese Sus Datos de Acceso");
+		setTitle("--.Inicio.--"); 									/// Coloca el nombre a la ventana
+		a = new JLabel ("Ingrese Sus Datos de Acceso");
 		a.setBounds(210, 90, 400,60);
-		a.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		a.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
+		a.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		a.setFont(new java.awt.Font ("Times New Roman",1 , 24)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(a);
 
 		t = new JLabel ("Tipo de usuario ");
 		t.setBounds(222, 170, 150,25);
-		t.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		t.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		t.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		t.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(t);
 
 		CmbUser_Type = new JComboBox(usertype);
 		CmbUser_Type.setBounds(360, 170, 150,25);
-		CmbUser_Type.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
+		CmbUser_Type.setForeground(Color.red); 								/// CAMBIAR COLOR DE LETRA
 		CmbUser_Type.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(CmbUser_Type);
 
 		x = new JLabel ("Nombre de usuario");
 		x.setBounds(190, 200, 180,25);
-		x.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		x.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		x.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		x.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(x);
 
 		user = new JTextField();
 		user.setBounds(360, 200, 150,25);
 		this.getContentPane().add(user);
 
-		y = new JLabel ("Contrase\u00f1a "); 							//\u00f1 para la 'ñ'
+		y = new JLabel ("Contrase\u00f1a "); 						// \u00f1 para la 'ñ'
 		y.setBounds(256, 230, 140,25);
-		y.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		y.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		y.setForeground(Color.white); 								// CAMBIAR COLOR DE LETRA
+		y.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	// CAMBIAR TIPO LETRA
 		this.getContentPane().add(y);
 
 		pas = new JPasswordField();
 		pas.setBounds(360, 230, 150,25);
 		this.getContentPane().add(pas);
 
-		boton3 = new JButton("Iniciar"); 								//crea el boton
+		boton3 = new JButton("Iniciar"); 							// Crea el boton
 		boton3.setBounds(300,270,110,40);
 		boton3.setForeground(Color.black);
 		//boton3.setBackground(java.awt.Color.red);
-		this.getContentPane().add(boton3); 								//agrega el boton a la ventana
+		this.getContentPane().add(boton3); 							// Agrega el boton a la ventana
 		boton3.addActionListener(this);
 
-		boton = new JButton("Salir"); 									//crea el boton
+		boton = new JButton("Salir"); 								// Crea el boton
 		boton.setBounds(420,270,110,40);
 		boton.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
-		this.getContentPane().add(boton); 								//agrega el boton a la ventana
+		this.getContentPane().add(boton); 							// Agrega el boton a la ventana
 		boton.addActionListener(this);
 
 		z = new JLabel ("G.J.W.O.");
 		z.setBounds(720, 448, 180,25);
-		z.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		z.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(z);
 		repaint();
 	}
 
-  void homeTrabajador()
+	// CHECK
+  	void homeTrabajador()
 	{
-		contenedor2=new Container();
+		contenedor2 = new Container();
 		setContentPane(contenedor2);
 		try
 		{
@@ -203,38 +204,105 @@ public class newhome extends JFrame implements ActionListener
 		}
 
 		String k = user.getText();
-		setTitle("Sesion iniciada como: "+k); 							//coloca el nombre a la ventana
+		setTitle("Sesion iniciada como: " + k); 				// Coloca el nombre a la ventana
 		this.setVisible(true);
 
 		j = new JLabel ("Realizar Consultas del trabajador");
-		j.setBounds(300, 130, 200,25);
+		j.setBounds(265, 55, 250,25);
+		j.setForeground(Color.white);
 		this.getContentPane().add(j);
 
-
-		consulta1 = new JButton("CONSULTA Nº1"); 									//crea el boton
-		consulta1.setBounds(100,100,200,40);
+		consulta1 = new JButton("CONSULTA Nº1"); 				// Crea el boton
+		consulta1.setBounds(33,100,200,40);
 		consulta1.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
-		this.getContentPane().add(consulta1); 								//agrega el boton a la ventana
+		this.getContentPane().add(consulta1); 					// Agrega el boton a la ventana
 		consulta1.addActionListener(this);
 
-    consulta2 = new JButton("CONSULTA Nº2"); 									//crea el boton
-		consulta2.setBounds(350,100,200,40);
+    	consulta2 = new JButton("CONSULTA Nº2"); 				// Crea el boton
+		consulta2.setBounds(300,100,200,40);
 		consulta2.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
-		this.getContentPane().add(consulta2); 								//agrega el boton a la ventana
+		this.getContentPane().add(consulta2); 					// Agrega el boton a la ventana
 		consulta2.addActionListener(this);
 
-    consulta3 = new JButton("CONSULTA Nº3"); 									//crea el boton
-		consulta3.setBounds(550,100,200,40);
+    	consulta3 = new JButton("CONSULTA Nº3"); 				// Crea el boton
+		consulta3.setBounds(565,100,200,40);
 		consulta3.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
-		this.getContentPane().add(consulta3); 								//agrega el boton a la ventana
+		this.getContentPane().add(consulta3); 					// Agrega el boton a la ventana
 		consulta3.addActionListener(this);
 
-		boton2 = new JButton("Cerrar Sesion"); //crea el boton
-		boton2.setBounds(300,270,150,40);
+		boton2 = new JButton("Cerrar Sesion"); 					// Crea el boton
+		boton2.setBounds(325,270,150,40);
 		//boton2.setBackground(java.awt.Color.blue);
+		this.getContentPane().add(boton2); 						// Agrega el boton a la ventana
+		boton2.addActionListener(this);
+
+		z = new JLabel ("G.J.W.O.");
+		z.setBounds(720, 448, 180,25);
+		z.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		z.setFont(new java.awt.Font ("Times New Roman",1 , 16));	/// CAMBIAR TIPO LETRA
+		this.getContentPane().add(z);
+
+		repaint();
+	}
+
+	void homeAdministrador()
+	{
+		contenedor3 = new Container();
+		setContentPane(contenedor3);
+
+		try
+		{
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("8.jpg")))));
+		}
+		catch(IOException e)
+		{
+		  	e.printStackTrace();
+		}
+
+		String k = user.getText();
+		setTitle("Sesion iniciada como: "+k); //coloca el nombre a la ventana
+		this.setVisible(true);
+
+		j = new JLabel ("Bienvenido");
+		j.setBounds(50, 100, 150,80);
+		j.setForeground(Color.white);
+		j.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(j);
+
+		r1=new JRadioButton("Insertar");
+		r1.setBounds(360,200,100,30);
+		//r1.setBackground(java.awt.Color.gray);
+		r1.setForeground(Color.red);
+		r1.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(r1);
+		r1.addActionListener(this);
+
+		r2=new JRadioButton("Eliminar");
+		r2.setBounds(360,230,100,30);
+		r2.setForeground(Color.red);
+		//r2.setBackground(java.awt.Color.gray);
+		r2.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(r2);
+		r2.addActionListener(this);
+
+		grupo = new ButtonGroup();
+		grupo.add(r1);
+		grupo.add(r2);
+
+		boton4 = new JButton("Continuar"); //crea el boton
+		boton4.setBounds(280,300,110,40);
+		boton4.setForeground(Color.black);
+		//boton4.setBackground(java.awt.Color.blue);
+		this.getContentPane().add(boton4); //agrega el boton a la ventana
+		boton4.addActionListener(this);
+
+		boton2 = new JButton("Cerrar sesion"); //crea el boton
+		boton2.setBounds(420,300,130,40);
+		boton2.setForeground(Color.black);
+		//boton.setBackground(java.awt.Color.blue);
 		this.getContentPane().add(boton2); //agrega el boton a la ventana
 		boton2.addActionListener(this);
 
@@ -243,76 +311,9 @@ public class newhome extends JFrame implements ActionListener
 		z.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(z);
-
-		repaint();
 	}
 
-  void homeAdministrador()
-  {
-    contenedor3 = new Container();
-    setContentPane(contenedor3);
-
-    try
-    {
-      this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("8.jpg")))));
-    }
-    catch(IOException e)
-    {
-      e.printStackTrace();
-    }
-
-    String k = user.getText();
-    setTitle("Sesion iniciada como: "+k); //coloca el nombre a la ventana
-    this.setVisible(true);
-
-    j = new JLabel ("Bienvenido");
-    j.setBounds(50, 100, 150,80);
-    j.setForeground(Color.white);
-    j.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(j);
-
-    r1=new JRadioButton("Insertar");
-    r1.setBounds(360,200,100,30);
-    //r1.setBackground(java.awt.Color.gray);
-    r1.setForeground(Color.red);
-    r1.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(r1);
-    r1.addActionListener(this);
-
-    r2=new JRadioButton("Eliminar");
-    r2.setBounds(360,230,100,30);
-    r2.setForeground(Color.red);
-    //r2.setBackground(java.awt.Color.gray);
-    r2.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(r2);
-    r2.addActionListener(this);
-
-    grupo = new ButtonGroup();
-    grupo.add(r1);
-    grupo.add(r2);
-
-    boton4 = new JButton("Continuar"); //crea el boton
-    boton4.setBounds(280,300,110,40);
-    boton4.setForeground(Color.black);
-    //boton4.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(boton4); //agrega el boton a la ventana
-    boton4.addActionListener(this);
-
-    boton2 = new JButton("Cerrar sesion"); //crea el boton
-    boton2.setBounds(420,300,130,40);
-    boton2.setForeground(Color.black);
-    //boton.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(boton2); //agrega el boton a la ventana
-    boton2.addActionListener(this);
-
-    z = new JLabel ("G.J.W.O.");
-    z.setBounds(720, 448, 180,25);
-    z.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-    z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(z);
-  }
-
-  void insercion ()
+  	void insercion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea Insertar");
 		insertw.setBounds(145, 170, 600,60);
@@ -321,7 +322,7 @@ public class newhome extends JFrame implements ActionListener
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    tablaInser = new JComboBox(tablas);
+    	tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
 		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
 		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
@@ -336,31 +337,31 @@ public class newhome extends JFrame implements ActionListener
 		regresar1.addActionListener(this);
 	}
 
-  void eliminacion ()
+  	void eliminacion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea eliminar");
 		insertw.setBounds(145, 170, 600,60);
-		insertw.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		insertw.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
+		insertw.setForeground(Color.white); 							/// CAMBIAR COLOR DE LETRA
+		insertw.setFont(new java.awt.Font ("Times New Roman",1 , 24)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    tablaInser = new JComboBox(tablas);
+    	tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
-		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
-		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		tablaInser.setForeground(Color.red); 								/// CAMBIAR COLOR DE LETRA
+		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
 		this.getContentPane().add(tablaInser);
 		tablaInser.addActionListener(this);
 
-    regresar1 = new JButton("Regresar"); //crea el boton
-    regresar1.setBounds(300,300,110,40);
-    regresar1.setForeground(Color.black);
-    //boton4.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(regresar1); //agrega el boton a la ventana
-    regresar1.addActionListener(this);
+	    regresar1 = new JButton("Regresar"); 	// Crea el boton
+	    regresar1.setBounds(300,300,110,40);
+	    regresar1.setForeground(Color.black);
+	    //boton4.setBackground(java.awt.Color.blue);
+	    this.getContentPane().add(regresar1); 	// Agrega el boton a la ventana
+	    regresar1.addActionListener(this);
 	}
 
-  void maquinaria ()
+  	void maquinaria ()
 	{
 		regresar1.setVisible(false);
 
@@ -413,7 +414,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void producto ()
+  	void producto ()
 	{
 		regresar1.setVisible(false);
 
@@ -484,7 +485,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void empresa()
+  	void empresa()
 	{
 		regresar1.setVisible(false);
 
@@ -567,7 +568,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void cliente ()
+  	void cliente ()
 	{
 		regresar1.setVisible(false);
 
@@ -620,7 +621,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void curso ()
+  	void curso ()
 	{
 		regresar1.setVisible(false);
 
@@ -682,7 +683,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void factura()
+  	void factura()
 	{
 		regresar1.setVisible(false);
 
