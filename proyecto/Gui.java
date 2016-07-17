@@ -11,14 +11,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 
-public class newhome extends JFrame implements ActionListener
+public class Gui extends JFrame implements ActionListener
 {
 	public JButton boton, boton2, boton3, boton4, continuar, continuarEl, regresar, regresar1, regresar2, consulta1, consulta2, consulta3, bm, eliminar;
 	public JPanel panel;
 	public JTextField user;
 	public JPasswordField pas;
 	public JLabel x, y, a, j, t, e, i, z;
-	public JComboBox CmbUser_Type, tablaInser, options;
+	public JComboBox CmbUser_Type, tablaInser, ofptions;
 	public Container contenedor, contenedor2, contenedor3;
 	private JRadioButton r1,r2;
 	private ButtonGroup grupo;
@@ -34,6 +34,108 @@ public class newhome extends JFrame implements ActionListener
 	String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
 	String[] tipos = {"CHOCOLATERA", "TIENDA", "PROCESADORA"};
 	String[] rifemp = {"abcd", "acdb", "bdgs"};
+
+	/*************************************************************/
+
+	public static final int W_WIDTH  = 800;
+	public static final int W_HEIGHT = 500;
+
+	/* Constructor */
+	public Gui(Home base) {
+		this.base;
+		this.setVisible(true);	// Warning
+		inicio();
+	}
+
+	void ventana() {
+		this.setBounds(100, 100, W_WIDTH, W_HEIGHT);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(null);
+		// setOpacity(0.9f); /* Poner transparente la ventana */
+	}
+
+	void inicio() {
+		ventana();
+		contenedor = new Container();
+		setContentPane(contenedor);
+		try {
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/6.jpg")))));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+
+		setTitle("--.Inicio.--"); 									/// Coloca el nombre a la ventana
+		a = new JLabel ("Ingrese Sus Datos de Acceso");
+		a.setBounds(210, 90, 400,60);
+		a.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		a.setFont(new java.awt.Font ("Times New Roman", 1, 24)); 	/// CAMBIAR TIPO LETRA
+		this.getContentPane().add(a);
+
+		t = new JLabel ("Tipo de usuario ");
+		t.setBounds(222, 170, 150,25);
+		t.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		t.setFont(new java.awt.Font ("Times New Roman", 1, 16)); 	/// CAMBIAR TIPO LETRA
+		this.getContentPane().add(t);
+
+		CmbUser_Type = new JComboBox(usertype);
+		CmbUser_Type.setBounds(360, 170, 150,25);
+		CmbUser_Type.setForeground(Color.red); 								/// CAMBIAR COLOR DE LETRA
+		CmbUser_Type.setFont(new java.awt.Font ("Times New Roman", 1, 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(CmbUser_Type);
+
+		x = new JLabel ("Nombre de usuario");
+		x.setBounds(190, 200, 180,25);
+		x.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		x.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
+		this.getContentPane().add(x);
+
+		user = new JTextField();
+		user.setBounds(360, 200, 150,25);
+		this.getContentPane().add(user);
+
+		y = new JLabel ("Contrase\u00f1a "); 						// \u00f1 para la 'ñ'
+		y.setBounds(256, 230, 140,25);
+		y.setForeground(Color.white); 								// CAMBIAR COLOR DE LETRA
+		y.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	// CAMBIAR TIPO LETRA
+		this.getContentPane().add(y);
+
+		pas = new JPasswordField();
+		pas.setBounds(360, 230, 150,25);
+		this.getContentPane().add(pas);
+
+		boton3 = new JButton("Iniciar"); 							// Crea el boton
+		boton3.setBounds(300,270,110,40);
+		boton3.setForeground(Color.black);
+		//boton3.setBackground(java.awt.Color.red);
+		this.getContentPane().add(boton3); 							// Agrega el boton a la ventana
+		boton3.addActionListener(this);
+
+		boton = new JButton("Salir"); 								// Crea el boton
+		boton.setBounds(420,270,110,40);
+		boton.setForeground(Color.black);
+		//boton.setBackground(java.awt.Color.red);
+		this.getContentPane().add(boton); 							// Agrega el boton a la ventana
+		boton.addActionListener(this);
+
+		z = new JLabel ("G.J.W.O.");
+		z.setBounds(720, 448, 180,25);
+		z.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
+		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
+		this.getContentPane().add(z);
+		repaint();
+	}
+
+	
+
+
+
+	/*************************************************************/
+
+
+
+
 
 	ResultSet Conexion(String sql)
 	{
@@ -94,101 +196,6 @@ public class newhome extends JFrame implements ActionListener
 		}
 	}
 
-	public static void main(String args[])
-	{
-		newhome ventana = new newhome();
-		ventana.setVisible(true);
-	}
-
-	public newhome()
-	{
-		inicio();
-	}
-
-	void ventana ()
-	{
-		this.setBounds(100,100,800,500); //tamaño de la ventana(eje x, eje y, ancho, largo)
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(null);
-		//setOpacity(0.9f); //poner transparente la ventana
-	}
-
-	void inicio ()
-	{
-		ventana();
-		contenedor = new Container();
-		setContentPane(contenedor);
-		try
-		{
-			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("6.jpg")))));
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		setTitle("--.Inicio.--"); 									/// Coloca el nombre a la ventana
-		a = new JLabel ("Ingrese Sus Datos de Acceso");
-		a.setBounds(210, 90, 400,60);
-		a.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
-		a.setFont(new java.awt.Font ("Times New Roman",1 , 24)); 	/// CAMBIAR TIPO LETRA
-		this.getContentPane().add(a);
-
-		t = new JLabel ("Tipo de usuario ");
-		t.setBounds(222, 170, 150,25);
-		t.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
-		t.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
-		this.getContentPane().add(t);
-
-		CmbUser_Type = new JComboBox(usertype);
-		CmbUser_Type.setBounds(360, 170, 150,25);
-		CmbUser_Type.setForeground(Color.red); 								/// CAMBIAR COLOR DE LETRA
-		CmbUser_Type.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-		this.getContentPane().add(CmbUser_Type);
-
-		x = new JLabel ("Nombre de usuario");
-		x.setBounds(190, 200, 180,25);
-		x.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
-		x.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
-		this.getContentPane().add(x);
-
-		user = new JTextField();
-		user.setBounds(360, 200, 150,25);
-		this.getContentPane().add(user);
-
-		y = new JLabel ("Contrase\u00f1a "); 						// \u00f1 para la 'ñ'
-		y.setBounds(256, 230, 140,25);
-		y.setForeground(Color.white); 								// CAMBIAR COLOR DE LETRA
-		y.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	// CAMBIAR TIPO LETRA
-		this.getContentPane().add(y);
-
-		pas = new JPasswordField();
-		pas.setBounds(360, 230, 150,25);
-		this.getContentPane().add(pas);
-
-		boton3 = new JButton("Iniciar"); 							// Crea el boton
-		boton3.setBounds(300,270,110,40);
-		boton3.setForeground(Color.black);
-		//boton3.setBackground(java.awt.Color.red);
-		this.getContentPane().add(boton3); 							// Agrega el boton a la ventana
-		boton3.addActionListener(this);
-
-		boton = new JButton("Salir"); 								// Crea el boton
-		boton.setBounds(420,270,110,40);
-		boton.setForeground(Color.black);
-		//boton.setBackground(java.awt.Color.red);
-		this.getContentPane().add(boton); 							// Agrega el boton a la ventana
-		boton.addActionListener(this);
-
-		z = new JLabel ("G.J.W.O.");
-		z.setBounds(720, 448, 180,25);
-		z.setForeground(Color.white); 								/// CAMBIAR COLOR DE LETRA
-		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); 	/// CAMBIAR TIPO LETRA
-		this.getContentPane().add(z);
-		repaint();
-	}
-
 	// CHECK
   	void homeTrabajador()
 	{
@@ -196,7 +203,7 @@ public class newhome extends JFrame implements ActionListener
 		setContentPane(contenedor2);
 		try
 		{
-			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("6.jpg")))));
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/6.jpg")))));
 		}
 		catch(IOException e)
 		{
@@ -255,7 +262,7 @@ public class newhome extends JFrame implements ActionListener
 
 		try
 		{
-			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("8.jpg")))));
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/8.jpg")))));
 		}
 		catch(IOException e)
 		{
