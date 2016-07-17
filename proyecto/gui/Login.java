@@ -1,3 +1,9 @@
+/* Login.java
+ * Interfaz del inicio de sesion
+ */
+
+package 
+
 import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -11,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 
-public class Gui extends JFrame implements ActionListener
+public class Login extends JFrame implements ActionListener
 {
 	public JButton boton, boton2, boton3, boton4, continuar, continuarEl, regresar, regresar1, regresar2, consulta1, consulta2, consulta3, bm, eliminar;
 	public JPanel panel;
@@ -43,7 +49,7 @@ public class Gui extends JFrame implements ActionListener
 	public static final int W_HEIGHT = 500;
 
 	/* Constructor */
-	public Gui(Home base) {
+	public Login(Home base) {
 		this.base = base;
 		inicio();
 	}
@@ -138,8 +144,7 @@ public class Gui extends JFrame implements ActionListener
 
 
 
-
-	/*
+	
 	ResultSet Conexion(String sql)
 	{
 		ResultSet x = null;
@@ -2074,5 +2079,4 @@ public class Gui extends JFrame implements ActionListener
 
 
   }
-  */
 }

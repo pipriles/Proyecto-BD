@@ -1,4 +1,4 @@
-/* home.java
+/* Home.java
  * Clase singleton que brinda comunicacion 
  * entre la interfaz y la base de datos 
  */
