@@ -28,75 +28,73 @@ public class newhome extends JFrame implements ActionListener
 	public String sql = "", sql2 = "", prueba;
 	JFrame ventana;
 
-  //Listas de opciones desplegables
-  String[] usertype = {"Administrador", "Trabajador"};
-  String[] opciones = {"Insertar", "Eliminar"};
-  String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
-  String[] tipos = {"CHOCOLATERA", "TIENDA", "PROCESADORA"};
-  String[] rifemp = {"abcd", "acdb", "bdgs"};
+	//Listas de opciones desplegables
+	String[] usertype = {"Administrador", "Trabajador"};
+	String[] opciones = {"Insertar", "Eliminar"};
+	String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
+	String[] tipos = {"CHOCOLATERA", "TIENDA", "PROCESADORA"};
+	String[] rifemp = {"abcd", "acdb", "bdgs"};
 
-  ResultSet Conexion(String sql)
-  {
-    ResultSet x = null;
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
+	ResultSet Conexion(String sql)
+	{
+		ResultSet x = null;
+		Connection conexion;
+		ConexionBD con;
+		con = new ConexionBD();
 
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
-      Statement st;
-      st = conexion.createStatement();
-      ResultSet rs;
-      rs = st.executeQuery(sql);
-      x = rs;
-    }
-    catch(SQLException e)
-    {
-      JOptionPane.showMessageDialog (null, "Error: "+e.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
-    }
-    return x;
-  }
+		try
+		{
+			conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
+			Statement st;
+			st = conexion.createStatement();
+			ResultSet rs;
+			rs = st.executeQuery(sql);
+			x = rs;
+		}
+		catch(SQLException e)
+		{
+			JOptionPane.showMessageDialog (null, "Error: "+e.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
+		}
+		return x;
+	}
 
 	void borrar (String sql)
-  {
-
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
-      Statement st;
-      st = conexion.createStatement();
-    	st.executeQuery(sql);
-    }
-    catch(SQLException e)
-    {
+	{
+		Connection conexion;
+		ConexionBD con;
+		con = new ConexionBD();
+		try
+		{
+			conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
+			Statement st;
+			st = conexion.createStatement();
+			st.executeQuery(sql);
+		}
+		catch(SQLException e)
+		{
 			JOptionPane.showMessageDialog (null,"Eliminacion Correcta");
-    }
-  }
+		}
+	}
 
 	void guardar (String sql)
-  {
-
-    Connection conexion;
-    ConexionBD con;
-    con = new ConexionBD();
-    try
-    {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
-      Statement st;
-      st = conexion.createStatement();
-    	st.executeQuery(sql);
-    }
-    catch(SQLException e)
-    {
+	{
+		Connection conexion;
+		ConexionBD con;
+		con = new ConexionBD();
+		try
+		{
+			conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
+			Statement st;
+			st = conexion.createStatement();
+			st.executeQuery(sql);
+		}
+		catch(SQLException e)
+		{
 			JOptionPane.showMessageDialog (null,"Insercion Correcta");
-    }
-  }
+		}
+	}
 
-  public static void main(String args[])
+	public static void main(String args[])
 	{
 		newhome ventana = new newhome();
 		ventana.setVisible(true);
@@ -107,14 +105,14 @@ public class newhome extends JFrame implements ActionListener
 		inicio();
 	}
 
-  void ventana ()
-  {
-    this.setBounds(100,100,800,500); //tamaño de la ventana(eje x, eje y, ancho, largo)
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
-    //setOpacity(0.9f); //poner transparente la ventana
-  }
+	void ventana ()
+	{
+		this.setBounds(100,100,800,500); //tamaño de la ventana(eje x, eje y, ancho, largo)
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(null);
+		//setOpacity(0.9f); //poner transparente la ventana
+	}
 
   void inicio ()
 	{
