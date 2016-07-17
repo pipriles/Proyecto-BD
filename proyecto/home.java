@@ -63,7 +63,7 @@ public class home extends JFrame implements ActionListener
 		con = new ConexionBD();
 
 		try{
-			conexion=con.obtConexion("proyecto_bd","choco","1234");
+			conexion=con.obtConexion("proyecto_bd","postgres","w95gio24");
 			Statement st;
 			st = conexion.createStatement();
 			ResultSet rs;

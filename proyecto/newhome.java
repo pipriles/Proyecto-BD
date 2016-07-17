@@ -32,7 +32,7 @@ public class newhome extends JFrame implements ActionListener
   String[] usertype = {"Administrador", "Trabajador"};
   String[] opciones = {"Insertar", "Eliminar"};
   String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
-  String[] tipos = {"CHOCOLATERA", "TIENDA", "PROCESADORA"};
+	String[] tipos = {"Procesadora", "Chocolatera", "Tienda"};
   String[] rifemp = {"abcd", "acdb", "bdgs"};
 
   ResultSet Conexion(String sql)
@@ -44,7 +44,7 @@ public class newhome extends JFrame implements ActionListener
 
     try
     {
-      conexion=con.obtConexion("proyecto_bd","postgres","josegregorio");
+      conexion=con.obtConexion("proyecto_bd","postgres","w95gio24");
       Statement st;
       st = conexion.createStatement();
       ResultSet rs;
@@ -79,7 +79,6 @@ public class newhome extends JFrame implements ActionListener
 
 	void guardar (String sql)
   {
-
     Connection conexion;
     ConexionBD con;
     con = new ConexionBD();
@@ -220,14 +219,14 @@ public class newhome extends JFrame implements ActionListener
 		this.getContentPane().add(consulta1); 								//agrega el boton a la ventana
 		consulta1.addActionListener(this);
 
-    consulta2 = new JButton("CONSULTA Nº2"); 									//crea el boton
+   	 	consulta2 = new JButton("CONSULTA Nº2"); 									//crea el boton
 		consulta2.setBounds(350,100,200,40);
 		consulta2.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
 		this.getContentPane().add(consulta2); 								//agrega el boton a la ventana
 		consulta2.addActionListener(this);
 
-    consulta3 = new JButton("CONSULTA Nº3"); 									//crea el boton
+    	consulta3 = new JButton("CONSULTA Nº3"); 									//crea el boton
 		consulta3.setBounds(550,100,200,40);
 		consulta3.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
@@ -868,7 +867,6 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-
 	void consultaEliminar(String sql)
 	{
 		System.out.println("S"+sql);
@@ -1268,7 +1266,6 @@ public class newhome extends JFrame implements ActionListener
 
     }
 
-
     /// Seleccion de tabla a Insertar
     if (e.getSource()== tablaInser && r1.isSelected())
 		{
@@ -1316,7 +1313,7 @@ public class newhome extends JFrame implements ActionListener
 				factura();
 				repaint();
 			}
-			if (prueba == "TRABAJADOR")
+			if (prueba == "MAESTRO")
 			{
 				//regresar1.setVisible(false);
 				insertw.setVisible(false);
@@ -1775,7 +1772,7 @@ public class newhome extends JFrame implements ActionListener
 				insercion();
 				repaint();
 			}
-			if (prueba == "TRABAJADOR")
+			if (prueba == "MAESTRO")
 			{
 				insertw.setVisible(false);
 				regresar.setVisible(false);
@@ -1876,6 +1873,13 @@ public class newhome extends JFrame implements ActionListener
 			{
 				if ((inserta.getText().length() > 0) && (insertc.getText().length() > 0) && (insertd.getText().length() > 0) && (inserte.getText().length() > 0) && (insertf.getText().length() > 0))
 				{
+					String a = inserta.getText();
+					String t = (String)insertTipo.getSelectedItem();
+					String c = insertc.getText();
+					String d = insertd.getText();
+					String g = inserte.getText();
+					String f = insertf.getText();
+
 					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
 					JOptionPane.showMessageDialog(rootPane, inserta.getText());
 					JOptionPane.showMessageDialog(rootPane, insertTipo.getSelectedItem());
@@ -1883,6 +1887,9 @@ public class newhome extends JFrame implements ActionListener
 					JOptionPane.showMessageDialog(rootPane, insertd.getText());
 					JOptionPane.showMessageDialog(rootPane, inserte.getText());
 					JOptionPane.showMessageDialog(rootPane, insertf.getText());
+					sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"','"+t+"','"+c+"','"+d+"','"+g+"','"+f+"')";
+					System.out.println("sql a insertar: "+sql);
+					guardar(sql);
 				}
 				else
 				{
@@ -1907,11 +1914,19 @@ public class newhome extends JFrame implements ActionListener
 			{
 				if ((inserta.getText().length() > 0) && (insertb.getText().length() > 0) && (insertc.getText().length() > 0) && (insertd.getText().length() > 0) )
 				{
+					String a = inserta.getText();
+					String b = insertb.getText();
+					String c = insertc.getText();
+					String d = insertd.getText();
+
 					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
 					JOptionPane.showMessageDialog(rootPane, inserta.getText());
 					JOptionPane.showMessageDialog(rootPane, insertb.getText());
 					JOptionPane.showMessageDialog(rootPane, insertc.getText());
 					JOptionPane.showMessageDialog(rootPane, insertd.getText());
+					sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"','"+b+"','"+c+"','"+d+"')";
+					System.out.println("sql a insertar: "+sql);
+					guardar(sql);
 				}
 				else
 				{
@@ -1928,14 +1943,21 @@ public class newhome extends JFrame implements ActionListener
 						JOptionPane.showMessageDialog(rootPane, "Por Favor, llenar el campo ci Maestro");
 				}
 			}
+
 			if (prueba == "CLIENTE")
 			{
 				if ((inserta.getText().length() > 0) && (insertb.getText().length() > 0) && (insertc.getText().length() > 0))
 				{
+					String a = inserta.getText();
+					String b = insertb.getText();
+					String c = insertc.getText();
 					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
 					JOptionPane.showMessageDialog(rootPane, inserta.getText());
 					JOptionPane.showMessageDialog(rootPane, insertb.getText());
 					JOptionPane.showMessageDialog(rootPane, insertc.getText());
+					sql = "INSERT INTO p.persona VALUES ('"+a+"','"+b+"','"+c+"')";
+					System.out.println("sql a insertar: "+sql);
+					guardar(sql);
 				}
 				else
 				{
@@ -1954,10 +1976,18 @@ public class newhome extends JFrame implements ActionListener
 				}
 
 			}
+
 			if (prueba == "FACTURA")
 			{
 				if ((insertb.getText().length() > 0) && (insertc.getText().length() > 0) && (insertd.getText().length() > 0) && (inserte.getText().length() > 0) && (insertf.getText().length() > 0))
 				{
+					String a = (String)insertRif.getSelectedItem();
+					String b = insertb.getText();
+					String c = insertc.getText();
+					String d = insertd.getText();
+					String f = inserte.getText();
+					String g = insertf.getText();
+
 					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
 					JOptionPane.showMessageDialog(rootPane, insertRif.getSelectedItem());
 					JOptionPane.showMessageDialog(rootPane, insertb.getText());
@@ -1965,6 +1995,9 @@ public class newhome extends JFrame implements ActionListener
 					JOptionPane.showMessageDialog(rootPane, insertd.getText());
 					JOptionPane.showMessageDialog(rootPane, inserte.getText());
 					JOptionPane.showMessageDialog(rootPane, insertf.getText());
+					sql = "INSERT INTO p.vende VALUES ('"+a+"','"+b+"','"+c+"',"+d+",'"+f+"',"+g+")";
+					System.out.println("sql a insertar: "+sql);
+					guardar(sql);
 				}
 				else
 				{
@@ -1984,10 +2017,19 @@ public class newhome extends JFrame implements ActionListener
 						JOptionPane.showMessageDialog(rootPane, "Por Favor, llenar el campo Costo");
 				}
 			}
-			if (prueba == "TRABAJADOR")
+
+			if (prueba == "MAESTRO")
 			{
 				if ((inserta.getText().length() > 0) && (insertb.getText().length() > 0) && (insertc.getText().length() > 0) && (insertd.getText().length() > 0) && (inserte.getText().length() > 0) && (insertf.getText().length() > 0) && (insertg.getText().length() > 0))
 				{
+					String a = inserta.getText();
+					String b = insertb.getText();
+					String c = insertc.getText();
+					String d = insertd.getText();
+					String f = inserte.getText();
+					String g = insertf.getText();
+					String h = insertg.getText();
+					String i = (String)insertRif.getSelectedItem();
 					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
 					JOptionPane.showMessageDialog(rootPane, inserta.getText());
 					JOptionPane.showMessageDialog(rootPane, insertb.getText());
@@ -1997,6 +2039,10 @@ public class newhome extends JFrame implements ActionListener
 					JOptionPane.showMessageDialog(rootPane, insertf.getText());
 					JOptionPane.showMessageDialog(rootPane, insertg.getText());
 					JOptionPane.showMessageDialog(rootPane, insertRif.getSelectedItem());
+
+					sql = "INSERT INTO p.trabajador VALUES ('"+a+"','"+b+"','"+c+"','"+d+"',"+f+",'"+g+"','"+h+"','"+i+"')";
+					System.out.println("sql a insertar: "+sql);
+					guardar(sql);
 				}
 				else
 				{
@@ -2024,46 +2070,118 @@ public class newhome extends JFrame implements ActionListener
 			}
 		}
 
-
     /// consulta 1
 		if (e.getSource() == consulta1)
 		{
-			String sql="SELECT * FROM p.persona";
-			ResultSet result = Conexion(sql);
+			JTable tablaConsulta1 = new JTable();
+			DefaultTableModel modelo = new DefaultTableModel();
+			String[] columnas = {"Codigo", "Nombre", "Peso", "Precio", "Tipo", "Etapa", "Trabajador de la Etapa"};
+			modelo.setColumnIdentifiers(columnas);
+			tablaConsulta1.setModel(modelo);
+			String sql = "select pmax.codigo, pmax.nombre, pmax.peso, pmax.precio, pmax.tipo, et.nombre, t.nombre from p.etapa et, p.trabajador t,p.procesa pcs,p.labora l,(select pr.codigo,pr.nombre, pr.peso, pr.precio, pr.tipo,e.rif from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron' and pr.precio = (select max(precio) from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron')) pmax where pcs.codigo = pmax.codigo and pcs.id = et.id and pcs.rif = pmax.rif and et.id = l.id and l.ci = t.ci";
+			ResultSet st = Conexion(sql);
+			String codigo, nombre, peso, precio, tipo, nombre_e, nombre_t;
 			try
 			{
-				Jtable1 tabla = new Jtable1();
-				String campos[] = {"ci", "nombre", "fecha de nacimiento"};
-				String  datos[][] = new String[3][3];
-				int i = 0;
-				while(result.next())
-				{
-					datos[i][0] = result.getString("ci");
-					datos[i][1] = result.getString("nombre");
-					datos[i][2] = result.getString("fecha_nacimiento");
-					//System.out.print(datos[i][0]);
-					//System.out.print(datos[i][1]);
-					//System.out.print(datos[i][2]);
-					i++;
-				}
-				tabla.set_Table(datos,campos);
-				}catch(Exception tet){
-
+					while(st.next())
+					{
+						codigo = st.getString("codigo");
+						nombre = st.getString("nombre");
+						peso = st.getString("peso");
+						precio = st.getString("precio");
+						tipo = st.getString("tipo");
+						nombre_e = st.getString("nombre");
+						nombre_t = st.getString("nombre");
+						modelo.addRow(new Object[]{codigo, nombre, peso, precio, tipo, nombre_e, nombre_t});
+					}
 			}
+			catch(Exception ex)
+			{
+				int ERROR_MESSAGE = 0;
+				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
+			}
+			ventana = new JFrame("Tabla de la Consulta 1º");
+			ventana.setLayout(new FlowLayout());
+			ventana.setSize(1000,500);
+			ventana.setVisible(true);
+			JScrollPane scroll = new JScrollPane(tablaConsulta1);
+			scroll.setPreferredSize(new Dimension(1000,800));
+			ventana.add(scroll);
 		}
 
     //consulta 2
 		if (e.getSource() == consulta2)
 		{
-
+			JTable tablaConsulta2 = new JTable();
+			DefaultTableModel modelo = new DefaultTableModel();
+			String[] columnas = {"codigo", "ganancia", "estado"};
+			modelo.setColumnIdentifiers(columnas);
+			tablaConsulta2.setModel(modelo);
+			String sql = "select v.codigo, sum(v.costo - pro.precio * v.cantidad ) over(partition by e.estado) as ganancia, e.estado from p.vende v, p.empresa e, p.producto pro where e.tipo = 'Tienda' and  e.nombre = 'Cacao Venezolano' and v.rif = e.rif and v.fecha >= '2016-05-01' and v.fecha <= '2016-05-31' and pro.codigo = v.codigo order by v.codigo asc, ganancia desc";
+			ResultSet st = Conexion(sql);
+			String codigo, ganancia, estado;
+			try
+			{
+					while(st.next())
+					{
+						codigo = st.getString("codigo");
+						ganancia = st.getString("ganancia");
+						estado = st.getString("estado");
+						modelo.addRow(new Object[]{codigo,ganancia,estado});
+					}
+			}
+			catch(Exception ex)
+			{
+				int ERROR_MESSAGE = 0;
+				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
+			}
+			ventana = new JFrame("Tabla de la Consulta 1º");
+			ventana.setLayout(new FlowLayout());
+			ventana.setSize(1000,500);
+			ventana.setVisible(true);
+			JScrollPane scroll = new JScrollPane(tablaConsulta2);
+			scroll.setPreferredSize(new Dimension(800,500));
+			ventana.add(scroll);
 		}
 
     //consulta 3
     if (e.getSource() == consulta3)
     {
-
+    	JTable tablaConsulta3 = new JTable();
+			DefaultTableModel modelo = new DefaultTableModel();
+			String[] columnas = {"codigo", "organizador", "nombre", "año", "premio", "participante", "delegado"};
+			modelo.setColumnIdentifiers(columnas);
+			tablaConsulta3.setModel(modelo);
+			//tablaConsulta3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			String sql = "SELECT x.codigo, x.organizador, x.nombre, x.anho, x.premio, c.participante, e.delegado FROM (SELECT codigo	FROM p.premio_conc GROUP BY codigo HAVING COUNT(*)=(SELECT MAX(COUNT(codigo)) OVER() FROM p.premio_conc GROUP BY codigo LIMIT 1)) pre, p.premio_conc x, p.concursa c, p.evento e WHERE c.codigo = pre.codigo AND e.participante = c.participante AND e.nombre = c.nombre AND e.organizador = c.organizador AND e.anho = c.anho AND x.codigo = pre.codigo";
+			ResultSet st = Conexion(sql);
+			String codigo, organizador, nombre, anho, premio, participante, delegado;
+			try
+			{
+					while(st.next())
+					{
+						codigo = st.getString("codigo");
+						organizador = st.getString("organizador");
+						nombre = st.getString("nombre");
+						anho = st.getString("anho");
+						premio = st.getString("premio");
+						participante = st.getString("participante");
+						delegado = st.getString("delegado");
+						modelo.addRow(new Object[]{codigo,organizador,nombre,anho,premio,participante,delegado});
+					}
+			}
+			catch(Exception ex)
+			{
+				int ERROR_MESSAGE = 0;
+				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
+			}
+			ventana = new JFrame("Tabla de la Consulta 3º");
+			ventana.setLayout(new FlowLayout());
+			ventana.setSize(1000,500);
+			ventana.setVisible(true);
+			JScrollPane scroll = new JScrollPane(tablaConsulta3);
+			scroll.setPreferredSize(new Dimension(800,500));
+			ventana.add(scroll);
     }
-
-
   }
 }
