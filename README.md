@@ -8,3 +8,4 @@ Proyecto de Bases de Datos
   - [ ] Llenar la base de datos
   - [ ] Limpiar el codigo haciendolo mas modular
   - [ ] Validacion de los tipos de datos cuando se insertan
+  - [ ] Manual de usuario
