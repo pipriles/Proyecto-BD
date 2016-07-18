@@ -1067,16 +1067,17 @@ public class Home extends JFrame implements ActionListener
   	{
 		String u = user.getText();
 		String p = pas.getText();
+		String ut;
 
 		// elimina de una tabla
-		if(e.getSource()==eliminar)
+		if(e.getSource() == eliminar)
 		{
 			borrar(sql2);
 			ventana.setVisible(false);
 		}
 
 		/// salida del programa
-	    if(e.getSource()==boton)
+	    if(e.getSource() == boton)
 			System.exit(0);
 
 	 	//validacion de campos de inicio de sesion
@@ -1103,9 +1104,11 @@ public class Home extends JFrame implements ActionListener
 
 	    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador")) {
 
-	  		this.dbc = new ConexionBD(BD_NAME, user.getText(), pas.getText());
+	  		this.dbc = new ConexionBD(BD_NAME, u, p);
 	  		if(dbc.connect()) {
-	  			if(dbc.getUserType().equals("administrador")) {
+	  			ut = dbc.getUserType();
+	  			System.out.println(ut);
+	  			if(ut.equals("administrador")) {
 		  			homeAdministrador();
 		  			repaint();
 		  		}
@@ -1125,9 +1128,11 @@ public class Home extends JFrame implements ActionListener
 
 	  	if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Trabajador")) {
 	  		
-	  		this.dbc = new ConexionBD(BD_NAME, user.getText(), pas.getText());
+	  		this.dbc = new ConexionBD(BD_NAME, u, p);
 	  		if(dbc.connect()) {
-		  		if(dbc.getUserType().equals("trabajador")) {
+	  			ut = dbc.getUserType();
+	  			System.out.println(ut);
+		  		if(ut.equals("trabajador") || ut.equals("administrador")) {
 		  			homeTrabajador();
 					repaint();
 				}
