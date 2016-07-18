@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import java.sql.*;
    
 public class ConexionBD {
 
@@ -29,6 +26,7 @@ public class ConexionBD {
     }
 
     public boolean connect() {
+        
         boolean re = false;
         try {
             String driverName = "org.postgresql.Driver";
@@ -36,15 +34,17 @@ public class ConexionBD {
             Class.forName(driverName);
             Connection conn = DriverManager.getConnection(url, this.user, this.pass);
             if (conn != null)
-               System.out.print("Conexion Establecida con Exito");
+               System.out.print("Conexion Establecida con Exito\n");
             
             this.connection = conn;
             re = true;
 
-        } catch (ClassNotFoundException exc) {
-            JOptionPane.showMessageDialog (null, "No se encontró el Driver de la BD"+exc.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog (null, "Error: " + e.getMessage(), "Error de Conexion", JOptionPane.ERROR_MESSAGE);
+        } 
+        catch (ClassNotFoundException e) {
+            System.out.println("No se encontró el Driver de la BD\n" + e.getMessage());
+        } 
+        catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage() + "\n");
         }
         return re;
     }
@@ -54,6 +54,7 @@ public class ConexionBD {
             if (this.connection != null) {
                 this.connection.close();
                 this.connection = null;
+                System.out.println("Desconectado!\n");
             }
             return true;
         }
@@ -79,6 +80,28 @@ public class ConexionBD {
 
     public Connection getConnection() {
         return this.connection;
+    }
+
+    public String getUserType() {
+        Statement st;
+        ResultSet rs;
+        String re = null;
+        String sql = "";
+        sql += "SELECT rolname FROM pg_roles ";
+        sql += "WHERE pg_has_role('" + this.user + "', oid, 'member') ";
+        sql += "AND (rolname = 'administrador' OR rolname = 'trabajador') ";
+        sql += "LIMIT 1;";
+        try {
+            st = this.connection.createStatement();
+            rs = st.executeQuery(sql);
+            if(rs.next()) {
+                re = rs.getString(1);
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return re;
     }
 
     //

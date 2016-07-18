@@ -3,15 +3,10 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class newhome extends JFrame implements ActionListener
+public class Home extends JFrame implements ActionListener
 {
 	public JButton boton, boton2, boton3, boton4, continuar, continuarEl, regresar, regresar1, regresar2, consulta1, consulta2, consulta3, bm, eliminar;
 	public JPanel panel;
@@ -38,19 +33,13 @@ public class newhome extends JFrame implements ActionListener
 	/***************************************************/
 
 	public static final String BD_NAME = "proyecto_bd";
-	public static final String BD_USER = "waldo";
-	public static final String BD_PASS = "1234";
+	public ConexionBD dbc = null;
 
 	ResultSet Conexion(String sql) {
 		Statement st;
 		ResultSet x = null;
-		Connection conexion;
-		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
-
 		try {
-			con.connect();
-			conexion = con.getConnection();
-			st = conexion.createStatement();
+			st = this.dbc.getConnection().createStatement();
 			x = st.executeQuery(sql);
 		}
 		catch(SQLException e) {
@@ -61,65 +50,54 @@ public class newhome extends JFrame implements ActionListener
 
 	void borrar(String sql) {
 		Statement st;
-		Connection conexion;
-		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
-
 		try {
-			con.connect();
-			conexion = con.getConnection();
-			st = conexion.createStatement();
+			st = this.dbc.getConnection().createStatement();
 			st.executeQuery(sql);
-		}
+		} 
 		catch(SQLException e) {
-			JOptionPane.showMessageDialog (null,"Eliminacion Correcta");
+			JOptionPane.showMessageDialog (null, "Eliminacion Correcta");
 		}
   	}
 
 	void guardar(String sql) {
 		Statement st;
-		Connection conexion;
-		ConexionBD con = new ConexionBD(BD_NAME, BD_USER, BD_PASS);
-
 		try {
-			con.connect();
-	  		conexion = con.getConnection();
-			st = conexion.createStatement();
+	  		st = this.dbc.getConnection().createStatement();
 			st.executeQuery(sql);
 		}
 		catch(SQLException e) {
-			JOptionPane.showMessageDialog (null,"Insercion Correcta");
+			JOptionPane.showMessageDialog (null, "Insercion Correcta");
 		}
   	}
 
   	/***************************************************/
 
   	public static void main(String args[]) {
-		newhome ventana = new newhome();
+		Home ventana = new Home();
 		ventana.setVisible(true);
 	}
 
-	public newhome()
-	{
+	public Home() {
 		inicio();
 	}
 
-  void ventana ()
-  {
-    this.setBounds(100,100,800,500); //tamaño de la ventana(eje x, eje y, ancho, largo)
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
-    //setOpacity(0.9f); //poner transparente la ventana
-  }
+	void ventana ()
+	{
+		this.setBounds(100,100,800,500); //tamaño de la ventana(eje x, eje y, ancho, largo)
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(null);
+		//setOpacity(0.9f); //poner transparente la ventana
+	}
 
-  void inicio ()
+	void inicio ()
 	{
 		ventana();
 		contenedor = new Container();
 		setContentPane(contenedor);
 		try
 		{
-			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("6.jpg")))));
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/6.jpg")))));
 		}
 		catch(IOException e)
 		{
@@ -193,7 +171,7 @@ public class newhome extends JFrame implements ActionListener
 		setContentPane(contenedor2);
 		try
 		{
-			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("6.jpg")))));
+			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/6.jpg")))));
 		}
 		catch(IOException e)
 		{
@@ -245,72 +223,72 @@ public class newhome extends JFrame implements ActionListener
 		repaint();
 	}
 
-  void homeAdministrador()
-  {
-    contenedor3 = new Container();
-    setContentPane(contenedor3);
+	void homeAdministrador()
+	{
+		contenedor3 = new Container();
+		setContentPane(contenedor3);
 
-    try
-    {
-      this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("8.jpg")))));
-    }
-    catch(IOException e)
-    {
-      e.printStackTrace();
-    }
+		try
+		{
+	  		this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img/8.jpg")))));
+		}
+		catch(IOException e)
+		{
+	  		e.printStackTrace();
+		}
 
-    String k = user.getText();
-    setTitle("Sesion iniciada como: "+k); //coloca el nombre a la ventana
-    this.setVisible(true);
+		String k = user.getText();
+		setTitle("Sesion iniciada como: "+k); //coloca el nombre a la ventana
+		this.setVisible(true);
 
-    j = new JLabel ("Bienvenido");
-    j.setBounds(50, 100, 150,80);
-    j.setForeground(Color.white);
-    j.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(j);
+		j = new JLabel ("Bienvenido");
+		j.setBounds(50, 100, 150,80);
+		j.setForeground(Color.white);
+		j.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(j);
 
-    r1=new JRadioButton("Insertar");
-    r1.setBounds(360,200,100,30);
-    //r1.setBackground(java.awt.Color.gray);
-    r1.setForeground(Color.red);
-    r1.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(r1);
-    r1.addActionListener(this);
+		r1=new JRadioButton("Insertar");
+		r1.setBounds(360,200,100,30);
+		//r1.setBackground(java.awt.Color.gray);
+		r1.setForeground(Color.red);
+		r1.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(r1);
+		r1.addActionListener(this);
 
-    r2=new JRadioButton("Eliminar");
-    r2.setBounds(360,230,100,30);
-    r2.setForeground(Color.red);
-    //r2.setBackground(java.awt.Color.gray);
-    r2.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(r2);
-    r2.addActionListener(this);
+		r2=new JRadioButton("Eliminar");
+		r2.setBounds(360,230,100,30);
+		r2.setForeground(Color.red);
+		//r2.setBackground(java.awt.Color.gray);
+		r2.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(r2);
+		r2.addActionListener(this);
 
-    grupo = new ButtonGroup();
-    grupo.add(r1);
-    grupo.add(r2);
+		grupo = new ButtonGroup();
+		grupo.add(r1);
+		grupo.add(r2);
 
-    boton4 = new JButton("Continuar"); //crea el boton
-    boton4.setBounds(280,300,110,40);
-    boton4.setForeground(Color.black);
-    //boton4.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(boton4); //agrega el boton a la ventana
-    boton4.addActionListener(this);
+		boton4 = new JButton("Continuar"); //crea el boton
+		boton4.setBounds(280,300,110,40);
+		boton4.setForeground(Color.black);
+		//boton4.setBackground(java.awt.Color.blue);
+		this.getContentPane().add(boton4); //agrega el boton a la ventana
+		boton4.addActionListener(this);
 
-    boton2 = new JButton("Cerrar sesion"); //crea el boton
-    boton2.setBounds(420,300,130,40);
-    boton2.setForeground(Color.black);
-    //boton.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(boton2); //agrega el boton a la ventana
-    boton2.addActionListener(this);
+		boton2 = new JButton("Cerrar sesion"); //crea el boton
+		boton2.setBounds(420,300,130,40);
+		boton2.setForeground(Color.black);
+		//boton.setBackground(java.awt.Color.blue);
+		this.getContentPane().add(boton2); //agrega el boton a la ventana
+		boton2.addActionListener(this);
 
-    z = new JLabel ("G.J.W.O.");
-    z.setBounds(720, 448, 180,25);
-    z.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-    z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-    this.getContentPane().add(z);
-  }
+		z = new JLabel ("G.J.W.O.");
+		z.setBounds(720, 448, 180,25);
+		z.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
+		z.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+		this.getContentPane().add(z);
+	}
 
-  void insercion ()
+  	void insercion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea Insertar");
 		insertw.setBounds(145, 170, 600,60);
@@ -319,7 +297,7 @@ public class newhome extends JFrame implements ActionListener
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    tablaInser = new JComboBox(tablas);
+    	tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
 		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
 		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
@@ -334,7 +312,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar1.addActionListener(this);
 	}
 
-  void eliminacion ()
+  	void eliminacion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea eliminar");
 		insertw.setBounds(145, 170, 600,60);
@@ -343,22 +321,22 @@ public class newhome extends JFrame implements ActionListener
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    tablaInser = new JComboBox(tablas);
+    	tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
 		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
 		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(tablaInser);
 		tablaInser.addActionListener(this);
 
-    regresar1 = new JButton("Regresar"); //crea el boton
-    regresar1.setBounds(300,300,110,40);
-    regresar1.setForeground(Color.black);
-    //boton4.setBackground(java.awt.Color.blue);
-    this.getContentPane().add(regresar1); //agrega el boton a la ventana
-    regresar1.addActionListener(this);
+	    regresar1 = new JButton("Regresar"); //crea el boton
+	    regresar1.setBounds(300,300,110,40);
+	    regresar1.setForeground(Color.black);
+	    //boton4.setBackground(java.awt.Color.blue);
+	    this.getContentPane().add(regresar1); //agrega el boton a la ventana
+	    regresar1.addActionListener(this);
 	}
 
-  void maquinaria ()
+  	void maquinaria ()
 	{
 		regresar1.setVisible(false);
 
@@ -411,7 +389,7 @@ public class newhome extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  void producto ()
+  	void producto ()
 	{
 		regresar1.setVisible(false);
 
@@ -904,7 +882,6 @@ public class newhome extends JFrame implements ActionListener
 			tabla.setModel(modelo);
 			System.out.println("SQL"+sql);
 			ResultSet st = Conexion(sql);
-			System.out.println("hola");
 			String codigo, nombre, peso, precio, tipo;
 	    try
 			{
@@ -1103,7 +1080,7 @@ public class newhome extends JFrame implements ActionListener
 			System.exit(0);
 
 	 	//validacion de campos de inicio de sesion
-    	if(e.getSource()== boton3)
+    	if(e.getSource() == boton3)
   		{
 	  		if (u.equals("") && p.equals(""))
 	  			JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de usuario y Contase\u00f1a");
@@ -1119,72 +1096,99 @@ public class newhome extends JFrame implements ActionListener
 	  		}
   		}
 
+
+
 	  	/**************************************/
 	  	/***** Inicio como administrador ******/
 
-	    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador"))
-	  	{
-	  		if(user.getText().equals("a") && pas.getText().equals("a"))
-	  		{
-	  			homeAdministrador();
-	  			repaint();
+	    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador")) {
+
+	  		this.dbc = new ConexionBD(BD_NAME, user.getText(), pas.getText());
+	  		if(dbc.connect()) {
+	  			if(dbc.getUserType().equals("administrador")) {
+		  			homeAdministrador();
+		  			repaint();
+		  		}
+		  		else {
+					dbc.disconnect();
+				}
 	  		}
-	  		else
-	  		{
-	  			if (!u.equals("") && !p.equals(""))
-	  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
+	  		else {
+  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
 	  		}
 	  	}
+
+
 
 	  	/**************************************/
 	  	/****** Inicio como trabajador ********/
 
 	  	if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Trabajador")) {
-	  		if(!u.equals("") && !p.equals("")){
-				homeTrabajador();
-				repaint();
+	  		
+	  		this.dbc = new ConexionBD(BD_NAME, user.getText(), pas.getText());
+	  		if(dbc.connect()) {
+		  		if(dbc.getUserType().equals("trabajador")) {
+		  			homeTrabajador();
+					repaint();
+				}
+				else {
+					dbc.disconnect();
+				}
 			}
+			else {
+	  			JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
+	  		}
 		}
 
 		/**************************************/
 
-    /// cierre de sesion
-    if(e.getSource() == boton2) {
-      	j.setVisible(false);
-		boton2.setVisible(false);
-		if(CmbUser_Type.getSelectedItem().equals("Administrador"))
-		{
-			r1.setVisible(false);
-			r2.setVisible(false);
-			boton4.setVisible(false);
-		}
-      	if(CmbUser_Type.getSelectedItem().equals("Trabajador")) {
-			consulta1.setVisible(false);
-			consulta2.setVisible(false);
-			consulta3.setVisible(false);
+
+
+    	/**************************************/
+	  	/********** Cierre de sesion **********/
+	    if(e.getSource() == boton2) {
+	      	j.setVisible(false);
+			boton2.setVisible(false);
+			if(CmbUser_Type.getSelectedItem().equals("Administrador"))
+			{
+				r1.setVisible(false);
+				r2.setVisible(false);
+				boton4.setVisible(false);
+			}
+	      	if(CmbUser_Type.getSelectedItem().equals("Trabajador")) {
+				consulta1.setVisible(false);
+				consulta2.setVisible(false);
+				consulta3.setVisible(false);
+			}
+
+			setTitle("Inicio"); //coloca el nombre a la ventana
+			add(a);
+			a.setVisible(true);
+			add(x);
+			x.setVisible(true);
+			add(user);
+			user.setText(null);
+			user.setVisible(true);
+			add(y);
+			y.setVisible(true);
+			add(pas);
+			pas.setText(null);
+			pas.setVisible(true);
+			add(boton);
+			boton.setVisible(true);
+			add(boton3);
+			boton3.setVisible(true);
+			add(CmbUser_Type);
+			CmbUser_Type.setVisible(true);
+			repaint();
+
+			/* Se desconecta de la BD */
+			dbc.disconnect();
 		}
 
-		setTitle("Inicio"); //coloca el nombre a la ventana
-		add(a);
-		a.setVisible(true);
-		add(x);
-		x.setVisible(true);
-		add(user);
-		user.setText(null);
-		user.setVisible(true);
-		add(y);
-		y.setVisible(true);
-		add(pas);
-		pas.setText(null);
-		pas.setVisible(true);
-		add(boton);
-		boton.setVisible(true);
-		add(boton3);
-		boton3.setVisible(true);
-		add(CmbUser_Type);
-		CmbUser_Type.setVisible(true);
-		repaint();
-	}
+		/**************************************/
+
+
 
     /// continuar en la insercion o eliminacion
     if (e.getSource()== boton4)
