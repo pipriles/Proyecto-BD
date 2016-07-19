@@ -248,6 +248,10 @@ footer {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+footer ul {
+  padding-left: 0;
+}
+
 @media print, screen and (max-width: 960px) {
 
   div.wrapper {
@@ -314,6 +318,8 @@ footer {
     width:33%;
   }
 }
+
+
 
 @media print {
   body {
