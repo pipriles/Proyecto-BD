@@ -272,7 +272,7 @@ public class Home extends JFrame implements ActionListener
 		this.setVisible(true);
 
 		j = new JLabel ("Bienvenido");
-		j.setBounds(50, 100, 150,80);
+		j.setBounds(350, 100, 150,80);
 		j.setForeground(Color.white);
 		j.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(j);
@@ -884,8 +884,8 @@ public class Home extends JFrame implements ActionListener
 			String serial, precio, pais;
 	    try
 			{
-				if (st.getRow() != 0)
-				{
+			//	if (st.getRow() != 0)
+				//{
 					while(st.next())
 					{
 							serial = st.getString("serial");
@@ -893,18 +893,18 @@ public class Home extends JFrame implements ActionListener
 							pais = st.getString("pais");
 							modelo.addRow(new Object[]{serial, precio, pais});
 					}
-					ventana = new JFrame(prueba);
+					/*ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+					ventana.add(scroll);*/
+				//}
+				//else
+				//{
+					//JOptionPane.showMessageDialog(null, "No se encuentra");
+				//}
 
 			}
 			catch(Exception ex)
@@ -923,8 +923,8 @@ public class Home extends JFrame implements ActionListener
 			String codigo, nombre, peso, precio, tipo;
 	    try
 			{
-				if (st.getRow() != 0)
-				{
+				/*if (st.getRow() != 0)
+				{*/
 					while(st.next())
 					{
 						codigo = st.getString("codigo");
@@ -934,18 +934,18 @@ public class Home extends JFrame implements ActionListener
 						tipo = st.getString("tipo");
 						modelo.addRow(new Object[]{codigo, nombre, peso, precio, tipo});
 					}
-					ventana = new JFrame(prueba);
+				/*	ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
+					ventana.add(scroll);*/
+			/*	}
 				else
 				{
 					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+				}*/
 			}
 			catch(Exception ex)
 			{
@@ -963,8 +963,8 @@ public class Home extends JFrame implements ActionListener
 				String rif, tipo, nombre, direccion, ciudad, estado;
 		    try
 				{
-					if (st.getRow() != 0)
-					{
+				/*	if (st.getRow() != 0)
+					{*/
 						while(st.next())
 						{
 							rif = st.getString("rif");
@@ -975,18 +975,18 @@ public class Home extends JFrame implements ActionListener
 							estado = st.getString("estado");
 							modelo.addRow(new Object[]{rif, tipo, nombre, direccion, ciudad, estado});
 						}
-						ventana = new JFrame(prueba);
+					/*	ventana = new JFrame(prueba);
 						ventana.setLayout(new FlowLayout());
 						ventana.setSize(1200,600);
 						ventana.setVisible(true);
 						JScrollPane scroll = new JScrollPane(tabla);
 						scroll.setPreferredSize(new Dimension(1000,1000));
-						ventana.add(scroll);
-				  }
+						ventana.add(scroll);*/
+				/*  }
 					else
 					{
 						JOptionPane.showMessageDialog(null, "No se encuentra");
-					}
+					}*/
 				}
 				catch(Exception ex)
 				{
@@ -1004,8 +1004,8 @@ public class Home extends JFrame implements ActionListener
 			String codigo, nombre, horario, ci_maestro;
 			try
 			{
-				if (st.getRow() != 0)
-				{
+				/*if (st.getRow() != 0)
+				{*/
 					while(st.next())
 					{
 						codigo = st.getString("codigo");
@@ -1014,18 +1014,18 @@ public class Home extends JFrame implements ActionListener
 						ci_maestro = st.getString("ci_maestro");
 						modelo.addRow(new Object[]{codigo, nombre, horario, ci_maestro});
 					}
-					ventana = new JFrame(prueba);
+					/*ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
+					ventana.add(scroll);*/
+				/*}
 				else
 				{
 					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+				}*/
 			}
 			catch(Exception ex)
 			{
@@ -1044,8 +1044,8 @@ public class Home extends JFrame implements ActionListener
 			String ci, nombre, fecha_nacimiento;
 			try
 			{
-				if (st.getRow() != 0)
-				{
+				/*if (st.getRow() != 0)
+				{*/
 					while(st.next())
 					{
 						ci = st.getString("ci");
@@ -1053,18 +1053,18 @@ public class Home extends JFrame implements ActionListener
 						fecha_nacimiento = st.getString("fecha_nacimiento");
 						modelo.addRow(new Object[]{ci, nombre,fecha_nacimiento});
 					}
-					ventana = new JFrame(prueba);
+					/*ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
-				else
+					ventana.add(scroll);*/
+				/*}
+			/*	else
 				{
 					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+				}*/
 			}
 			catch(Exception ex)
 			{
@@ -1082,8 +1082,8 @@ public class Home extends JFrame implements ActionListener
 			String ci, nombre, fecha_nacimiento,cargo,sueldo,fecha_inicio,fecha_fin,rif;
 			try
 			{
-				if (st.getRow() != 0)
-				{
+				/*if (st.getRow() != 0)
+				{*/
 					while(st.next())
 					{
 						ci = st.getString("ci");
@@ -1096,18 +1096,18 @@ public class Home extends JFrame implements ActionListener
 						rif = st.getString("rif");
 						modelo.addRow(new Object[]{ci, nombre,fecha_nacimiento,cargo,sueldo,fecha_inicio,fecha_fin,rif});
 					}
-					ventana = new JFrame(prueba);
+					/*ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
-				else
+					ventana.add(scroll);*/
+			/*	}
+			/*	else
 				{
 					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+				}*/
 			}
 			catch(Exception ex)
 			{
@@ -1125,8 +1125,8 @@ public class Home extends JFrame implements ActionListener
 			String rif, codigo, ci, cantidad, fecha, costo;
 			try
 			{
-				if (st.getRow() != 0)
-				{
+			/*	if (st.getRow() != 0)
+				{*/
 					while(st.next())
 					{
 						rif = st.getString("rif");
@@ -1137,18 +1137,18 @@ public class Home extends JFrame implements ActionListener
 						costo = st.getString("costo");
 						modelo.addRow(new Object[]{rif,codigo,ci,cantidad,fecha,costo});
 					}
-					ventana = new JFrame(prueba);
+					/*ventana = new JFrame(prueba);
 					ventana.setLayout(new FlowLayout());
 					ventana.setSize(1200,600);
 					ventana.setVisible(true);
 					JScrollPane scroll = new JScrollPane(tabla);
 					scroll.setPreferredSize(new Dimension(1000,1000));
-					ventana.add(scroll);
-				}
-				else
+					ventana.add(scroll);*/
+			/*	}
+			/*	else
 				{
 					JOptionPane.showMessageDialog(null, "No se encuentra");
-				}
+				}*/
 			}
 			catch(Exception ex)
 			{
@@ -1156,6 +1156,16 @@ public class Home extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
 		}
+
+		ventana = new JFrame(prueba);
+		ventana.setLayout(new FlowLayout());
+		ventana.setSize(1200,600);
+		ventana.setVisible(true);
+		JScrollPane scroll = new JScrollPane(tabla);
+		scroll.setPreferredSize(new Dimension(1000,1000));
+		ventana.add(scroll);
+
+
 		//botn para elminar en la ventana de las tablas
 	 	eliminar= new JButton("Eliminar"); //crea el boton
 		eliminar.setBounds(0,0,110,40);
