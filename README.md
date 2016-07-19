@@ -1,7 +1,7 @@
 # Proyecto-BD
 Proyecto de Bases de Datos
 
-Para compilar:
+Para ejecutar:
 ``` sh
 java -cp .:lib/driver.jar home
 ```
