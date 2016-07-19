@@ -3,11 +3,9 @@ CREATE ROLE Administrador NOSUPERUSER;
 CREATE ROLE Trabajador NOSUPERUSER;
 
 /*** CREACION DE LA BASE DE DATOS ***/
-
 CREATE DATABASE proyecto_bd TEMPLATE template1;
 
 /*** CONEXION A LA BASE DE DATOS ***/
-
 \c proyecto_bd
 
 /*** CREACION DEL ESQUEMA ***/
@@ -36,9 +34,7 @@ CREATE TABLE p.evento(
 	organizador varchar(60)  NOT NULL,
 	nombre varchar(60)  NOT NULL,
 	anho int  NOT NULL,
-	participante varchar(60)  NOT NULL,
-	delegado varchar(60),
-	PRIMARY KEY (organizador, nombre, anho, participante)
+	PRIMARY KEY (organizador, nombre, anho)
 );
 /* Asignando los permisos necesarios a mis usuarios*/
 GRANT ALL ON TABLE p.evento TO Administrador;
@@ -56,7 +52,7 @@ GRANT ALL ON TABLE p.producto TO Administrador;
 GRANT SELECT ON TABLE p.producto TO Trabajador;
 
 CREATE TABLE p.maquinaria (
-	serial int  PRIMARY KEY NOT NULL,
+	serial p.tipo_codigo  PRIMARY KEY NOT NULL,
 	precio p.tipo_numerico NOT NULL,
 	pais varchar(60) NOT NULL 
 );
@@ -105,10 +101,10 @@ GRANT SELECT ON TABLE p.persona TO Trabajador;
 CREATE TABLE p.encargo
 (
 	codigo p.tipo_codigo PRIMARY KEY NOT NULL,
-	rif p.tipo_ci REFERENCES p.empresa,		/*deberiamos identificarlo como tipo RIF, no como tipo cedula, eso confunde*/
+	rif p.tipo_ci REFERENCES p.empresa,		
 	costo p.tipo_numerico NOT NULL,
 	fecha date NOt NULL,
-	incidente varchar(100),		/*este atributo es obligatorio?, me parece que no*/
+	incidente varchar(100),		
 	ruta varchar(100) NOT NULL
 );
 /* Asignando los permisos necesarios a mis usuarios*/
@@ -118,7 +114,6 @@ GRANT SELECT ON TABLE p.encargo TO Trabajador;
 CREATE TABLE p.trabajador
 (
 	ci p.tipo_ci PRIMARY KEY NOT NULL,
-	--~ ci_persona p.tipo_ci NOT NULL,
 	nombre varchar(60) NOT NULL,
 	fecha_nacimiento date NOT NULL,
 	cargo varchar(60) NOT NULL,
@@ -126,12 +121,6 @@ CREATE TABLE p.trabajador
 	fecha_inicio date NOT NULL,
 	fecha_fin date NOT NULL,
 	rif p.tipo_ci NOT NULL REFERENCES p.empresa
-	/*FOREIGN KEY(rif) REFERENCES p.empresa
-		ON UPDATE CASCADE
-		ON DELETE CASCADE*/
-	/*FOREIGN KEY(ci_persona) REFERENCES p.persona
-		ON UPDATE CASCADE
-		ON DELETE CASCADE*/
 );
 /* Asignando los permisos necesarios a mis usuarios*/
 GRANT ALL ON TABLE p.trabajador TO Administrador;
@@ -140,12 +129,8 @@ GRANT SELECT ON TABLE p.trabajador TO Trabajador;
 
 CREATE TABLE p.estudiante(
 	ci p.tipo_ci PRIMARY KEY NOT NULL,
-	--~ ci_persona p.tipo_ci NOT NULL,		/*redundancia no controlada, cual es la diferencia?, creo que solo va ci_persona como foranea*/
 	nombre varchar(60) NOT NULL,
 	fecha_nac date NOT NULL
-	/*FOREIGN KEY(ci) REFERENCES p.persona
-		ON UPDATE CASCADE
-		ON DELETE CASCADE*/
 );
 /* Asignando los permisos necesarios a mis usuarios*/
 GRANT ALL ON TABLE p.estudiante TO Administrador;
@@ -155,11 +140,10 @@ CREATE TABLE p.premio_conc (
 	organizador varchar(60) NOT NULL,
 	nombre varchar(60)  NOT NULL,
 	anho int NOT NULL,
-	participante varchar(60),
 	premio varchar(50)  NOT NULL, 
 	codigo p.tipo_codigo NOT NULL,
-	PRIMARY KEY (organizador, nombre, premio, codigo),
-	FOREIGN KEY (organizador, nombre, anho, participante) REFERENCES p.evento(organizador, nombre, anho, participante)
+	PRIMARY KEY (organizador, nombre, anho, premio, codigo),
+	FOREIGN KEY (organizador, nombre, anho) REFERENCES p.evento(organizador, nombre, anho)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	FOREIGN KEY (codigo) REFERENCES p.producto
@@ -174,10 +158,9 @@ CREATE TABLE p.concursa (
 	nombre varchar(60) NOT NULL,
 	anho int NOT NULL,
 	organizador varchar(60) NOT NULL,
-	participante varchar(60),
 	codigo p.tipo_codigo NOT NULL,
-	PRIMARY KEY (nombre, anho, organizador, participante, codigo),
-	FOREIGN KEY (organizador, nombre, anho, participante) REFERENCES p.evento(organizador, nombre, anho, participante)
+	PRIMARY KEY (nombre, anho, organizador, codigo),
+	FOREIGN KEY (organizador, nombre, anho) REFERENCES p.evento(organizador, nombre, anho)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	FOREIGN KEY (codigo) REFERENCES p.producto
@@ -193,8 +176,9 @@ CREATE TABLE p.participante_ev (
 	nombre varchar(60)  NOT NULL,
 	anho int  NOT NULL, 
 	participante varchar(60) NOT NULL,
+	delegado varchar(60) NOT NULL,
 	PRIMARY KEY (organizador, nombre, anho, participante),	
-	FOREIGN KEY (organizador, nombre, anho, participante) REFERENCES p.evento(organizador, nombre, anho, participante)
+	FOREIGN KEY (organizador, nombre, anho) REFERENCES p.evento(organizador, nombre, anho)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -221,7 +205,7 @@ CREATE TABLE p.procesa
 	codigo p.tipo_codigo NOT NULL, 
 	rif p.tipo_codigo NOT NULL,
 	cantidad float NOT NULL,
-	PRIMARY KEY (id, codigo),
+	PRIMARY KEY (id, codigo,rif),
 	FOREIGN KEY (id) REFERENCES p.etapa
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
@@ -236,7 +220,6 @@ CREATE TABLE p.procesa
 GRANT ALL ON TABLE p.procesa TO Administrador;
 GRANT SELECT ON TABLE p.procesa TO Trabajador;
 
-/*ESTAS DOS TABLAS NO SON LA MISMA VAINA (procesa-usa) ??*/
 CREATE TABLE p.usa
 (
 	id p.tipo_codigo NOT NULL,
@@ -347,7 +330,7 @@ GRANT SELECT ON TABLE p.curso TO Trabajador;
 
 CREATE TABLE p.asiste(
 	ci_estudiante p.tipo_ci NOT NULL,
-	codigo p.tipo_codigo NOT NULL,		/*de que sirve este codigo, si lo vamos a usar debe ser foranea con la clase que asiste ?*/
+	codigo p.tipo_codigo NOT NULL,		
 	PRIMARY KEY (ci_estudiante, codigo),
 	FOREIGN KEY (ci_estudiante) REFERENCES p.estudiante
 		ON UPDATE CASCADE
@@ -380,9 +363,7 @@ GRANT ALL ON TABLE p.vende TO Administrador;
 GRANT SELECT ON TABLE p.vende TO Trabajador;
 
 CREATE TABLE p.necesita(
-	/*codigo_producto p.tipo_producto NOT NULL,*/		/*Esto es con el codigo del producto no con el tipo*/
 	codigo_producto p.tipo_codigo NOT NULL,
-	/*codigo_ingrediente p.tipo_producto NOT NULL,*/	/*Esto es con el codigo del producto no con el tipo*/
 	codigo_ingrediente p.tipo_codigo NOT NULL,
 	cantidad int NOT NULL,		/* esta cantidad no deberia ser en kg? */
 	PRIMARY KEY (codigo_producto, codigo_ingrediente),
