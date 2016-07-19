@@ -34,9 +34,6 @@ DROP DOMAIN p.tipo_numerico;
 
 DROP SCHEMA p;
 
-DROP USER jose;
-DROP USER jose1;
-
 \c postgres
 
 DROP DATABASE proyecto_bd;
