@@ -16,6 +16,7 @@ DROP TABLE p.premio_conc;
 DROP TABLE p.estudiante;
 DROP TABLE p.trabajador;
 
+
 DROP TABLE p.persona;
 DROP TABLE p.encargo;
 DROP TABLE p.empresa;
@@ -33,8 +34,8 @@ DROP DOMAIN p.tipo_numerico;
 
 DROP SCHEMA p;
 
-DROP USER Administrador;
-DROP USER Trabajador;
+DROP USER jose;
+DROP USER jose1;
 
 \c postgres
 

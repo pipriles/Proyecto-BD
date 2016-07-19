@@ -8,26 +8,26 @@ import java.sql.*;
 
 public class Home extends JFrame implements ActionListener
 {
-	public JButton boton, boton2, boton3, boton4, continuar, continuarEl, regresar, regresar1, regresar2, consulta1, consulta2, consulta3, bm, eliminar;
+	public JButton boton, boton2, boton3, boton4, continuar, continuarEl, regresar, regresar1, regresar2, consulta1, consulta2, consulta3, bm, eliminar, salir;
 	public JPanel panel;
 	public JTextField user;
 	public JPasswordField pas;
-	public JLabel x, y, a, j, t, e, i, z;
-	public JComboBox CmbUser_Type, tablaInser, options;
+	public JLabel x, y, a, j, e, i, z,t1,t2,t3,t4,t5,t6,t7,t8;
+	public JComboBox tablaInser, options;
 	public Container contenedor, contenedor2, contenedor3;
 	private JRadioButton r1,r2;
 	private ButtonGroup grupo;
-	public JTextField inserta,insertb,insertc,insertd,inserte,insertf, insertg, inserth;
+	public JTextField inserta,insertb,insertc,insertd,inserte,insertf, insertg, inserth, insertRif;
 	public JLabel insertx, inserty, insertz, insertw, insertww, insertu, insertv, insertt, insertr, inserts;
-	public JComboBox insertTipo, insertRif;
+	public JComboBox insertTipo;
 	public String sql = "", sql2 = "", prueba;
 	JFrame ventana;
 
 	//Listas de opciones desplegables
-	String[] usertype = {"Administrador", "Trabajador"};
 	String[] opciones = {"Insertar", "Eliminar"};
 	String[] tablas = {"SELECCIONE LA TABLA","PRODUCTO", "EMPRESA", "MAQUINARIA", "CLIENTE", "CURSO", "MAESTRO", "FACTURA"};
-	String[] tipos = {"Procesadora", "Chocolatera", "Tienda"};
+	String[] tipos = {"Seleccione el tipo","Procesadora", "Chocolatera", "Tienda"};
+	String[] tipop = {"Producto", "Ingrediente"};
 	String[] rifemp = {"abcd", "acdb", "bdgs"};
 
 	/***************************************************/
@@ -35,49 +35,58 @@ public class Home extends JFrame implements ActionListener
 	public static final String BD_NAME = "proyecto_bd";
 	public ConexionBD dbc = null;
 
-	ResultSet Conexion(String sql) {
+	ResultSet Conexion(String sql)
+	{
 		Statement st;
 		ResultSet x = null;
-		try {
+		try
+		{
 			st = this.dbc.getConnection().createStatement();
 			x = st.executeQuery(sql);
 		}
-		catch(SQLException e) {
+		catch(SQLException e)
+		{
 	  		JOptionPane.showMessageDialog (null, "Error: " + e.getMessage(), "Error Conexion", JOptionPane.ERROR_MESSAGE);
 		}
 		return x;
 	}
 
-	void borrar(String sql) {
+	void borrar(String sql)
+	{
 		Statement st;
-		try {
+		try
+		{
 			st = this.dbc.getConnection().createStatement();
 			st.executeQuery(sql);
-		} 
-		catch(SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			JOptionPane.showMessageDialog (null, "Eliminacion Correcta");
 		}
-  	}
+  }
 
-	void guardar(String sql) {
+	void guardar(String sql)
+	{
 		Statement st;
-		try {
-	  		st = this.dbc.getConnection().createStatement();
+		try
+		{
+	  	st = this.dbc.getConnection().createStatement();
 			st.executeQuery(sql);
 		}
-		catch(SQLException e) {
+		catch(SQLException e)
+		{
 			JOptionPane.showMessageDialog (null, "Insercion Correcta");
 		}
-  	}
+  }
 
-  	/***************************************************/
-
-  	public static void main(String args[]) {
+	public static void main(String args[])
+	{
 		Home ventana = new Home();
 		ventana.setVisible(true);
 	}
 
-	public Home() {
+	public Home()
+	{
 		inicio();
 	}
 
@@ -111,49 +120,36 @@ public class Home extends JFrame implements ActionListener
 		a.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(a);
 
-		t = new JLabel ("Tipo de usuario ");
-		t.setBounds(222, 170, 150,25);
-		t.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		t.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-		this.getContentPane().add(t);
-
-		CmbUser_Type = new JComboBox(usertype);
-		CmbUser_Type.setBounds(360, 170, 150,25);
-		CmbUser_Type.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
-		CmbUser_Type.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
-		this.getContentPane().add(CmbUser_Type);
-
 		x = new JLabel ("Nombre de usuario");
-		x.setBounds(190, 200, 180,25);
+		x.setBounds(190, 190, 180,25);
 		x.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 		x.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(x);
 
 		user = new JTextField();
-		user.setBounds(360, 200, 150,25);
+		user.setBounds(360, 190, 150,25);
 		this.getContentPane().add(user);
 
 		y = new JLabel ("Contrase\u00f1a "); 							//\u00f1 para la 'ñ'
-		y.setBounds(256, 230, 140,25);
+		y.setBounds(256, 220, 130,25);
 		y.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 		y.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(y);
 
 		pas = new JPasswordField();
-		pas.setBounds(360, 230, 150,25);
+		pas.setBounds(360, 220, 150,25);
 		this.getContentPane().add(pas);
 
 		boton3 = new JButton("Iniciar"); 								//crea el boton
-		boton3.setBounds(300,270,110,40);
+		boton3.setBounds(290,280,110,40);
 		boton3.setForeground(Color.black);
 		//boton3.setBackground(java.awt.Color.red);
 		this.getContentPane().add(boton3); 								//agrega el boton a la ventana
 		boton3.addActionListener(this);
 
 		boton = new JButton("Salir"); 									//crea el boton
-		boton.setBounds(420,270,110,40);
+		boton.setBounds(420,280,110,40);
 		boton.setForeground(Color.black);
-		//boton.setBackground(java.awt.Color.red);
 		this.getContentPane().add(boton); 								//agrega el boton a la ventana
 		boton.addActionListener(this);
 
@@ -182,35 +178,69 @@ public class Home extends JFrame implements ActionListener
 		setTitle("Sesion iniciada como: "+k); 							//coloca el nombre a la ventana
 		this.setVisible(true);
 
-		j = new JLabel ("Realizar Consultas del trabajador");
-		j.setBounds(300, 130, 200,25);
+		j = new JLabel ("Mostrar el Producto más costoso que se produce  en la “Chocolatera Cimarrón”,");
+		j.setBounds(120, 20, 800,35);
+		j.setForeground(Color.white);
+		j.setFont(new java.awt.Font ("Times New Roman",1 , 12));
 		this.getContentPane().add(j);
-
-
-		consulta1 = new JButton("CONSULTA Nº1"); 									//crea el boton
-		consulta1.setBounds(100,100,200,40);
+		t1 = new JLabel ("sus  distintas  etapas de producción y qué trabajadores están");
+		t1.setBounds(170, 35, 800,35);
+		t1.setForeground(Color.white);
+		t1.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t1);
+		t2 = new JLabel ("vinculados en cada etapa");
+		t2.setBounds(300, 50, 800,35);
+		t2.setForeground(Color.white);
+		t2.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t2);
+		consulta1 = new JButton("Consultar"); 									//crea el boton
+		consulta1.setBounds(290,80,200,40);
 		consulta1.setForeground(Color.black);
-		//boton.setBackground(java.awt.Color.red);
 		this.getContentPane().add(consulta1); 								//agrega el boton a la ventana
 		consulta1.addActionListener(this);
 
-   	 	consulta2 = new JButton("CONSULTA Nº2"); 									//crea el boton
-		consulta2.setBounds(350,100,200,40);
+		/*Referente a consulta 2*/
+		t3 = new JLabel ("Productos vendidos en el mes de mayo de 2016 y ganancias de cada Tienda");
+		t3.setBounds(120, 135, 800,35);
+		t3.setForeground(Color.white);
+		t3.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t3);
+		t4 = new JLabel ("“Cacao Venezolano” clasificadas por estado y ordenados por la clave");
+		t4.setBounds(125, 150, 800,35);
+		t4.setForeground(Color.white);
+		t4.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t4);
+		t5 = new JLabel ("del producto en forma ascendente y por la ganancia de forma descendente");
+		t5.setBounds(120, 165, 800,35);
+		t5.setForeground(Color.white);
+		t5.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t5);
+		consulta2 = new JButton("Consultar"); 									//crea el boton
+		consulta2.setBounds(290,195,200,40);
 		consulta2.setForeground(Color.black);
-		//boton.setBackground(java.awt.Color.red);
 		this.getContentPane().add(consulta2); 								//agrega el boton a la ventana
 		consulta2.addActionListener(this);
 
-    	consulta3 = new JButton("CONSULTA Nº3"); 									//crea el boton
-		consulta3.setBounds(550,100,200,40);
+		/*Referente a consulta 3*/
+		t6 = new JLabel ("Producto que ha ganado mayor cantidad de premios y toda la informacion");
+		t6.setBounds(155, 250, 800,35);
+		t6.setForeground(Color.white);
+		t6.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t6);
+		t7 = new JLabel ("del evento y de los premios otorgados");
+		t7.setBounds(260, 260, 800,35);
+		t7.setForeground(Color.white);
+		t7.setFont(new java.awt.Font ("Times New Roman",1 , 12));
+		this.getContentPane().add(t7);
+		consulta3 = new JButton("Consultar"); 									//crea el boton
+		consulta3.setBounds(290,295,200,40);
 		consulta3.setForeground(Color.black);
 		//boton.setBackground(java.awt.Color.red);
 		this.getContentPane().add(consulta3); 								//agrega el boton a la ventana
 		consulta3.addActionListener(this);
 
 		boton2 = new JButton("Cerrar Sesion"); //crea el boton
-		boton2.setBounds(300,270,150,40);
-		//boton2.setBackground(java.awt.Color.blue);
+		boton2.setBounds(317,380,150,40);
 		this.getContentPane().add(boton2); //agrega el boton a la ventana
 		boton2.addActionListener(this);
 
@@ -288,7 +318,7 @@ public class Home extends JFrame implements ActionListener
 		this.getContentPane().add(z);
 	}
 
-  	void insercion ()
+  void insercion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea Insertar");
 		insertw.setBounds(145, 170, 600,60);
@@ -297,7 +327,7 @@ public class Home extends JFrame implements ActionListener
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    	tablaInser = new JComboBox(tablas);
+    tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
 		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
 		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
@@ -305,14 +335,14 @@ public class Home extends JFrame implements ActionListener
 		tablaInser.addActionListener(this);
 
 		regresar1 = new JButton("Regresar"); //crea el boton
-		regresar1.setBounds(300,300,110,40);
+		regresar1.setBounds(330,350,110,40);
 		regresar1.setForeground(Color.black);
 		//boton4.setBackground(java.awt.Color.blue);
 		this.getContentPane().add(regresar1); //agrega el boton a la ventana
 		regresar1.addActionListener(this);
 	}
 
-  	void eliminacion ()
+  void eliminacion ()
 	{
 		insertw = new JLabel ("Seleccione Donde Desea eliminar");
 		insertw.setBounds(145, 170, 600,60);
@@ -321,22 +351,22 @@ public class Home extends JFrame implements ActionListener
 		this.getContentPane().add(insertw);
 		insertw.setVisible(true);
 
-    	tablaInser = new JComboBox(tablas);
+    tablaInser = new JComboBox(tablas);
 		tablaInser.setBounds(300, 270, 150,25);
 		tablaInser.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
 		tablaInser.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(tablaInser);
 		tablaInser.addActionListener(this);
 
-	    regresar1 = new JButton("Regresar"); //crea el boton
-	    regresar1.setBounds(300,300,110,40);
-	    regresar1.setForeground(Color.black);
-	    //boton4.setBackground(java.awt.Color.blue);
-	    this.getContentPane().add(regresar1); //agrega el boton a la ventana
-	    regresar1.addActionListener(this);
+	  regresar1 = new JButton("Regresar"); //crea el boton
+		regresar1.setBounds(330,350,110,40);
+	  regresar1.setForeground(Color.black);
+	  //boton4.setBackground(java.awt.Color.blue);
+	  this.getContentPane().add(regresar1); //agrega el boton a la ventana
+	  regresar1.addActionListener(this);
 	}
 
-  	void maquinaria ()
+  void maquinaria ()
 	{
 		regresar1.setVisible(false);
 
@@ -389,7 +419,7 @@ public class Home extends JFrame implements ActionListener
 		regresar.addActionListener(this);
 	}
 
-  	void producto ()
+  void producto ()
 	{
 		regresar1.setVisible(false);
 
@@ -675,10 +705,8 @@ public class Home extends JFrame implements ActionListener
 		insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(insertx);
 
-		insertRif = new JComboBox(rifemp);
+		insertRif = new JTextField();
 		insertRif.setBounds(110, 200, 150,25);
-		insertRif.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
-		insertRif.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(insertRif);
 
 		inserty = new JLabel ("Codigo");
@@ -821,10 +849,8 @@ public class Home extends JFrame implements ActionListener
 		inserts.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(inserts);
 
-		insertRif = new JComboBox(rifemp);
+		insertRif = new JTextField();
 		insertRif.setBounds(470, 290, 150,25);
-		insertRif.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
-		insertRif.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 		this.getContentPane().add(insertRif);
 
 		continuar = new JButton("Continuar"); //crea el boton
@@ -844,13 +870,12 @@ public class Home extends JFrame implements ActionListener
 
 	void consultaEliminar(String sql)
 	{
-		System.out.println("S"+sql);
 		JTable tabla = new JTable();
 		DefaultTableModel modelo = new DefaultTableModel();
 		//para mquinaria
 		if (prueba == "MAQUINARIA")
 		{
-			String[] columnas = {"serial", "precio", "pais"};
+			String[] columnas = {"Serial", "Precio", "Pais"};
 
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
@@ -859,13 +884,28 @@ public class Home extends JFrame implements ActionListener
 			String serial, precio, pais;
 	    try
 			{
-				while(st.next())
+				if (st.getRow() != 0)
 				{
-						serial = st.getString("serial");
-						precio = st.getString("precio");
-						pais = st.getString("pais");
-						modelo.addRow(new Object[]{serial, precio, pais});
+					while(st.next())
+					{
+							serial = st.getString("serial");
+							precio = st.getString("precio");
+							pais = st.getString("pais");
+							modelo.addRow(new Object[]{serial, precio, pais});
+					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
+				}
+
 			}
 			catch(Exception ex)
 			{
@@ -876,23 +916,35 @@ public class Home extends JFrame implements ActionListener
 		//para PRODUCTO
 		if (prueba == "PRODUCTO")
 		{
-			String[] columnas = {"codigo", "nombre", "peso", "precio", "tipo"};
-
+			String[] columnas = {"Codigo", "Nombre", "Peso", "Precio", "Tipo"};
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
-			System.out.println("SQL"+sql);
 			ResultSet st = Conexion(sql);
 			String codigo, nombre, peso, precio, tipo;
 	    try
 			{
-				while(st.next())
+				if (st.getRow() != 0)
 				{
+					while(st.next())
+					{
 						codigo = st.getString("codigo");
 						nombre = st.getString("nombre");
 						peso = st.getString("peso");
 						precio = st.getString("precio");
 						tipo = st.getString("tipo");
 						modelo.addRow(new Object[]{codigo, nombre, peso, precio, tipo});
+					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
 				}
 			}
 			catch(Exception ex)
@@ -904,13 +956,15 @@ public class Home extends JFrame implements ActionListener
 		//para EMPRESA
 		if (prueba == "EMPRESA")
 		{
-				String[] columnas = {"rif", "tipo", "nombre", "direccion", "ciudad", "estado"};
+				String[] columnas = {"RIF", "Tipo", "Nombre", "Direccion", "Ciudad", "Estado"};
 				modelo.setColumnIdentifiers(columnas);
 				tabla.setModel(modelo);
 				ResultSet st = Conexion(sql);
 				String rif, tipo, nombre, direccion, ciudad, estado;
 		    try
 				{
+					if (st.getRow() != 0)
+					{
 						while(st.next())
 						{
 							rif = st.getString("rif");
@@ -921,6 +975,18 @@ public class Home extends JFrame implements ActionListener
 							estado = st.getString("estado");
 							modelo.addRow(new Object[]{rif, tipo, nombre, direccion, ciudad, estado});
 						}
+						ventana = new JFrame(prueba);
+						ventana.setLayout(new FlowLayout());
+						ventana.setSize(1200,600);
+						ventana.setVisible(true);
+						JScrollPane scroll = new JScrollPane(tabla);
+						scroll.setPreferredSize(new Dimension(1000,1000));
+						ventana.add(scroll);
+				  }
+					else
+					{
+						JOptionPane.showMessageDialog(null, "No se encuentra");
+					}
 				}
 				catch(Exception ex)
 				{
@@ -928,15 +994,18 @@ public class Home extends JFrame implements ActionListener
 					JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 				}
 		}
+
 		if (prueba == "CURSO")
 		{
-			String[] columnas = {"codigo", "nombre", "horario", "ci_maestro"};
+			String[] columnas = {"Codigo", "Nombre", "Horario", "Cedula Maestro"};
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
 			ResultSet st = Conexion(sql);
 			String codigo, nombre, horario, ci_maestro;
 			try
 			{
+				if (st.getRow() != 0)
+				{
 					while(st.next())
 					{
 						codigo = st.getString("codigo");
@@ -945,6 +1014,18 @@ public class Home extends JFrame implements ActionListener
 						ci_maestro = st.getString("ci_maestro");
 						modelo.addRow(new Object[]{codigo, nombre, horario, ci_maestro});
 					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
+				}
 			}
 			catch(Exception ex)
 			{
@@ -956,13 +1037,15 @@ public class Home extends JFrame implements ActionListener
 		//para CLIENTE
 		if (prueba == "CLIENTE")
 		{
-			String[] columnas = {"ci", "nombre", "fecha_nacimiento"};
+			String[] columnas = {"Cedula", "Nombre", "Fecha de Nacimiento"};
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
 			ResultSet st = Conexion(sql);
 			String ci, nombre, fecha_nacimiento;
 			try
 			{
+				if (st.getRow() != 0)
+				{
 					while(st.next())
 					{
 						ci = st.getString("ci");
@@ -970,6 +1053,18 @@ public class Home extends JFrame implements ActionListener
 						fecha_nacimiento = st.getString("fecha_nacimiento");
 						modelo.addRow(new Object[]{ci, nombre,fecha_nacimiento});
 					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
+				}
 			}
 			catch(Exception ex)
 			{
@@ -977,15 +1072,18 @@ public class Home extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
 		}
+
 		if (prueba == "MAESTRO")
 		{
-			String[] columnas = {"ci", "nombre", "fecha_nacimiento", "cargo", "sueldo", "fecha_inicio", "fecha_fin", "rif"};
+			String[] columnas = {"Cedula", "Nombre", "Fecha de Nacimiento", "Cargo", "Sueldo", "Fecha de Inicio", "Fecha Fin", "RIF de Empresa"};
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
 			ResultSet st = Conexion(sql);
 			String ci, nombre, fecha_nacimiento,cargo,sueldo,fecha_inicio,fecha_fin,rif;
 			try
 			{
+				if (st.getRow() != 0)
+				{
 					while(st.next())
 					{
 						ci = st.getString("ci");
@@ -998,6 +1096,18 @@ public class Home extends JFrame implements ActionListener
 						rif = st.getString("rif");
 						modelo.addRow(new Object[]{ci, nombre,fecha_nacimiento,cargo,sueldo,fecha_inicio,fecha_fin,rif});
 					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
+				}
 			}
 			catch(Exception ex)
 			{
@@ -1008,13 +1118,15 @@ public class Home extends JFrame implements ActionListener
 
 		if (prueba == "FACTURA")
 		{
-			String[] columnas = {"rif", "codigo", "ci", "cantidad", "fecha", "costo"};
+			String[] columnas = {"RIF", "Codigo", "Cedula", "Cantidad", "Fecha", "Costo"};
 			modelo.setColumnIdentifiers(columnas);
 			tabla.setModel(modelo);
 			ResultSet st = Conexion(sql);
 			String rif, codigo, ci, cantidad, fecha, costo;
 			try
 			{
+				if (st.getRow() != 0)
+				{
 					while(st.next())
 					{
 						rif = st.getString("rif");
@@ -1025,6 +1137,18 @@ public class Home extends JFrame implements ActionListener
 						costo = st.getString("costo");
 						modelo.addRow(new Object[]{rif,codigo,ci,cantidad,fecha,costo});
 					}
+					ventana = new JFrame(prueba);
+					ventana.setLayout(new FlowLayout());
+					ventana.setSize(1200,600);
+					ventana.setVisible(true);
+					JScrollPane scroll = new JScrollPane(tabla);
+					scroll.setPreferredSize(new Dimension(1000,1000));
+					ventana.add(scroll);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No se encuentra");
+				}
 			}
 			catch(Exception ex)
 			{
@@ -1032,39 +1156,17 @@ public class Home extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
 		}
-
-		ventana = new JFrame("Tablas");
-		ventana.setLayout(new FlowLayout());
-		ventana.setSize(1500,500);
-		ventana.setVisible(true);
-		JScrollPane scroll = new JScrollPane(tabla);
-		scroll.setPreferredSize(new Dimension(800,500));
-		ventana.add(scroll);
-
-		insertw = new JLabel ("Ingrese todos los datos");
-		insertw.setBounds(250, 110, 600,60);
-		insertw.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
-		insertw.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
-		ventana.getContentPane().add(insertw);
-		insertw.setVisible(true);
-
 		//botn para elminar en la ventana de las tablas
 	 	eliminar= new JButton("Eliminar"); //crea el boton
 		eliminar.setBounds(0,0,110,40);
 		eliminar.setForeground(Color.black);
-		//boton4.setBackground(java.awt.Color.blue);
 		ventana.getContentPane().add(eliminar); //agrega el boton a la ventana
 		eliminar.addActionListener(this);
 	}
 
-
-
 	/***********************************************/
-
-
-
-  	public void actionPerformed(ActionEvent e)
-  	{
+	public void actionPerformed(ActionEvent e)
+  {
 		String u = user.getText();
 		String p = pas.getText();
 		String ut;
@@ -1077,93 +1179,83 @@ public class Home extends JFrame implements ActionListener
 		}
 
 		/// salida del programa
-	    if(e.getSource() == boton)
+	  if(e.getSource() == boton)
 			System.exit(0);
 
 	 	//validacion de campos de inicio de sesion
-    	if(e.getSource() == boton3)
-  		{
-	  		if (u.equals("") && p.equals(""))
-	  			JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de usuario y Contase\u00f1a");
-	  		else
-	  		{
-	  			if(u.equals("")||u == null)
-	  				JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre del usuario");
-	  			else
-	  			{
-	  				if(p.equals("")||p == null)
-	  					JOptionPane.showMessageDialog(rootPane, "Ingrese la contrase\u00f1a");
-	  			}
-	  		}
-  		}
-
-
-
-	  	/**************************************/
-	  	/***** Inicio como administrador ******/
-
-	    if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Administrador")) {
-
-	  		this.dbc = new ConexionBD(BD_NAME, u, p);
-	  		if(dbc.connect()) {
-	  			ut = dbc.getUserType();
-	  			System.out.println(ut);
-	  			if(ut.equals("administrador")) {
-		  			homeAdministrador();
-		  			repaint();
-		  		}
-		  		else {
-					dbc.disconnect();
-				}
-	  		}
-	  		else {
-  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
-	  		}
-	  	}
-
-
-
-	  	/**************************************/
-	  	/****** Inicio como trabajador ********/
-
-	  	if (e.getSource() == boton3 && CmbUser_Type.getSelectedItem().equals("Trabajador")) {
-	  		
-	  		this.dbc = new ConexionBD(BD_NAME, u, p);
-	  		if(dbc.connect()) {
-	  			ut = dbc.getUserType();
-	  			System.out.println(ut);
-		  		if(ut.equals("trabajador") || ut.equals("administrador")) {
-		  			homeTrabajador();
-					repaint();
-				}
-				else {
-					dbc.disconnect();
+  	if(e.getSource() == boton3)
+  	{
+			if (u.equals("") && p.equals(""))
+				JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de usuario y Contase\u00f1a");
+			else
+			{
+				if(u.equals("")||u == null)
+					JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre del usuario");
+				else
+				{
+					if(p.equals("")||p == null)
+						JOptionPane.showMessageDialog(rootPane, "Ingrese la contrase\u00f1a");
 				}
 			}
-			else {
-	  			JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
-	  		}
-		}
+  	}
 
-		/**************************************/
+  	/**************************************/
+  	/***** Inicio como administrador ******/
+    if (e.getSource() == boton3)
+		{
+	  	this.dbc = new ConexionBD(BD_NAME, u, p);
+	  	if(dbc.connect())
+			{
+	  		ut = dbc.getUserType();
+	  		System.out.println(ut);
+	  		if(ut.equals("administrador"))
+				{
+					homeAdministrador();
+		  		repaint();
+		  	}
+				if(ut.equals("trabajador"))
+				{
+					homeTrabajador();
+					repaint();
+				}
+		  	/*else
+				{
+					//dbc.disconnect();
+				}*/
+	  	}
+	  	else
+			{
+  				JOptionPane.showMessageDialog(null, "Datos Incorrectos, Verifique");
+	  	}
+	  }
 
-
-
-    	/**************************************/
-	  	/********** Cierre de sesion **********/
-	    if(e.getSource() == boton2) {
-	      	j.setVisible(false);
+	  /********** Cierre de sesion **********/
+	  if(e.getSource() == boton2)
+		{
+			j.setVisible(false);
 			boton2.setVisible(false);
-			if(CmbUser_Type.getSelectedItem().equals("Administrador"))
+			ut = dbc.getUserType();
+			System.out.println(ut);
+			if(ut.equals("administrador"))
 			{
 				r1.setVisible(false);
 				r2.setVisible(false);
 				boton4.setVisible(false);
+				repaint();
 			}
-	      	if(CmbUser_Type.getSelectedItem().equals("Trabajador")) {
+		  if(ut.equals("trabajador"))
+			{
 				consulta1.setVisible(false);
 				consulta2.setVisible(false);
 				consulta3.setVisible(false);
+				t1.setVisible(false);
+				t2.setVisible(false);
+				t3.setVisible(false);
+				t4.setVisible(false);
+				t5.setVisible(false);
+				t6.setVisible(false);
+				t7.setVisible(false);
+				repaint();
 			}
 
 			setTitle("Inicio"); //coloca el nombre a la ventana
@@ -1183,17 +1275,10 @@ public class Home extends JFrame implements ActionListener
 			boton.setVisible(true);
 			add(boton3);
 			boton3.setVisible(true);
-			add(CmbUser_Type);
-			CmbUser_Type.setVisible(true);
 			repaint();
-
 			/* Se desconecta de la BD */
-			dbc.disconnect();
+			//dbc.disconnect();
 		}
-
-		/**************************************/
-
-
 
     /// continuar en la insercion o eliminacion
     if (e.getSource()== boton4)
@@ -1232,7 +1317,6 @@ public class Home extends JFrame implements ActionListener
       regresar1.setVisible(false);
       r1.setVisible(true);
       r2.setVisible(true);
-      //grupo.setVisible(true);
       z.setVisible(true);
       z.setVisible(true);
       boton4.setVisible(true);
@@ -1252,10 +1336,7 @@ public class Home extends JFrame implements ActionListener
 				inserta.setVisible(false);
 				bm.setVisible(false);
 				regresar2.setVisible(false);
-
-				insertw.setVisible(true);
-				tablaInser.setVisible(true);
-				regresar1.setVisible(true);
+				eliminacion();
 				repaint();
 			}
 			if (prueba == "FACTURA")
@@ -1269,14 +1350,9 @@ public class Home extends JFrame implements ActionListener
 				insertb.setVisible(false);
 				insertz.setVisible(false);
 				insertc.setVisible(false);
-
-				insertw.setVisible(true);
-				tablaInser.setVisible(true);
-				regresar1.setVisible(true);
+				eliminacion();
 				repaint();
-
 			}
-
     }
 
     /// Seleccion de tabla a Insertar
@@ -1345,31 +1421,31 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
-				insertww.setBounds(200, 110, 600,60);
+				insertww = new JLabel ("Ingrese el Serial de La Maquinaria");
+				insertww.setBounds(180, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertww);
 				insertww.setVisible(true);
 
 				insertx = new JLabel ("Serial");
-				insertx.setBounds(50, 210, 100,25);
+				insertx.setBounds(290, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(356, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1381,7 +1457,7 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
+				insertww = new JLabel ("Ingrese el Codigo del Producto");
 				insertww.setBounds(200, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
@@ -1389,23 +1465,23 @@ public class Home extends JFrame implements ActionListener
 				insertww.setVisible(true);
 
 				insertx = new JLabel ("Codigo");
-				insertx.setBounds(50, 210, 100,25);
+				insertx.setBounds(286, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(356, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1417,31 +1493,31 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
-				insertww.setBounds(200, 110, 600,60);
+				insertww = new JLabel ("Ingrese el RIF de la Empresa");
+				insertww.setBounds(210, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertww);
 				insertww.setVisible(true);
 
-				insertx = new JLabel ("rif");
-				insertx.setBounds(50, 210, 100,25);
+				insertx = new JLabel ("RIF");
+				insertx.setBounds(290, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(356, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1453,7 +1529,7 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
+				insertww = new JLabel ("Ingrese Codigo del Curso");
 				insertww.setBounds(200, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
@@ -1461,23 +1537,23 @@ public class Home extends JFrame implements ActionListener
 				insertww.setVisible(true);
 
 				insertx = new JLabel ("Codigo");
-				insertx.setBounds(50, 210, 100,25);
+				insertx.setBounds(286, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(362, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1489,31 +1565,31 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
+				insertww = new JLabel ("Ingrese la Cedula del Cliente");
 				insertww.setBounds(200, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertww);
 				insertww.setVisible(true);
 
-				insertx = new JLabel ("CI");
-				insertx.setBounds(50, 210, 100,25);
+				insertx = new JLabel ("Cedula");
+				insertx.setBounds(286, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(366, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1526,52 +1602,50 @@ public class Home extends JFrame implements ActionListener
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
 
-				insertww = new JLabel ("Ingrese todos los datos");
-				insertww.setBounds(250, 110, 600,60);
+				insertww = new JLabel ("Ingrese los datos de la Factura");
+				insertww.setBounds(220, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertww);
 				insertww.setVisible(true);
 
 				insertx = new JLabel ("RIF");
-				insertx.setBounds(65, 200, 100,25);
+				insertx.setBounds(65, 240, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 
-				insertRif = new JComboBox(rifemp);
-				insertRif.setBounds(110, 200, 150,25);
-				insertRif.setForeground(Color.red); /// CAMBIAR COLOR DE LETRA
-				insertRif.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
+				insertRif = new JTextField();
+				insertRif.setBounds(110, 240, 150,25);
 				this.getContentPane().add(insertRif);
 
 				inserty = new JLabel ("Codigo");
-				inserty.setBounds(280, 200, 100,25);
+				inserty.setBounds(280, 240, 100,25);
 				inserty.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				inserty.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(inserty);
 				insertb = new JTextField();
-				insertb.setBounds(350, 200, 150,25);
+				insertb.setBounds(350, 240, 150,25);
 				this.getContentPane().add(insertb);
 
 				insertz = new JLabel ("Cedula");
-				insertz.setBounds(510, 200, 100,25);
+				insertz.setBounds(510, 240, 100,25);
 				insertz.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertz.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertz);
 				insertc = new JTextField();
-				insertc.setBounds(575, 200, 150,25);
+				insertc.setBounds(575, 240, 150,25);
 				this.getContentPane().add(insertc);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1583,31 +1657,31 @@ public class Home extends JFrame implements ActionListener
 				regresar1.setVisible(false);
 				insertw.setVisible(false);
 				tablaInser.setVisible(false);
-				insertww = new JLabel ("Ingrese todos los datos");
+				insertww = new JLabel ("Ingrese la Cedula del Maestro");
 				insertww.setBounds(200, 110, 600,60);
 				insertww.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertww.setFont(new java.awt.Font ("Times New Roman",1 , 24)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertww);
 				insertww.setVisible(true);
 
-				insertx = new JLabel ("CI");
-				insertx.setBounds(50, 210, 100,25);
+				insertx = new JLabel ("Cedula");
+				insertx.setBounds(286, 210, 100,25);
 				insertx.setForeground(Color.white); /// CAMBIAR COLOR DE LETRA
 				insertx.setFont(new java.awt.Font ("Times New Roman",1 , 16)); /// CAMBIAR TIPO LETRA
 				this.getContentPane().add(insertx);
 				inserta = new JTextField();
-				inserta.setBounds(110, 210, 150,25);
+				inserta.setBounds(366, 210, 150,25);
 				this.getContentPane().add(inserta);
 
 				bm = new JButton("continuar"); //crea el boton
-				bm.setBounds(430,350,110,40);
+				bm.setBounds(300,300,110,40);
 				bm.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(bm); //agrega el boton a la ventana
 				bm.addActionListener(this);
 
 				regresar2 = new JButton("Regresar"); //crea el boton
-				regresar2.setBounds(300,300,110,40);
+				regresar2.setBounds(450,300,110,40);
 				regresar2.setForeground(Color.black);
 				//boton4.setBackground(java.awt.Color.blue);
 				this.getContentPane().add(regresar2); //agrega el boton a la ventana
@@ -1669,7 +1743,7 @@ public class Home extends JFrame implements ActionListener
 			}
 			if (prueba == "FACTURA")
 			{
-				String a = (String)insertRif.getSelectedItem();
+				String a = insertRif.getText();
 				String b = insertb.getText();
 				String c = insertc.getText();
 
@@ -1820,16 +1894,22 @@ public class Home extends JFrame implements ActionListener
 			{
 				if ((inserta.getText().length() > 0) && (insertb.getText().length() > 0) && (insertc.getText().length() > 0))
 				{
-					String a = inserta.getText();
 					String b = insertb.getText();
-					String c = insertc.getText();
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					sql = "INSERT INTO p."+prueba+" VALUES ("+a+","+b+",'"+c+"')";
-					System.out.println("sql a insertar: "+sql);
-					guardar(sql);
+					float pp = Float.parseFloat(b);
+
+					if(pp > 0)
+					{
+						String a = inserta.getText();
+						//String b = insertb.getText();
+						String c = insertc.getText();
+						sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"',"+b+",'"+c+"')";
+						System.out.println("sql a insertar: "+sql);
+						guardar(sql);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(rootPane, "Precio debe ser mayor a cero");
+					}
 				}
 				else
 				{
@@ -1853,12 +1933,6 @@ public class Home extends JFrame implements ActionListener
 					String d = insertd.getText();
 					String f = inserte.getText();
 
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					JOptionPane.showMessageDialog(rootPane, insertd.getText());
-					JOptionPane.showMessageDialog(rootPane, inserte.getText());
 					sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"','"+b+"',"+c+","+d+",'"+f+"')";
 					System.out.println("sql a insertar: "+sql);
 					guardar(sql);
@@ -1893,13 +1967,6 @@ public class Home extends JFrame implements ActionListener
 					String g = inserte.getText();
 					String f = insertf.getText();
 
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertTipo.getSelectedItem());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					JOptionPane.showMessageDialog(rootPane, insertd.getText());
-					JOptionPane.showMessageDialog(rootPane, inserte.getText());
-					JOptionPane.showMessageDialog(rootPane, insertf.getText());
 					sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"','"+t+"','"+c+"','"+d+"','"+g+"','"+f+"')";
 					System.out.println("sql a insertar: "+sql);
 					guardar(sql);
@@ -1932,11 +1999,6 @@ public class Home extends JFrame implements ActionListener
 					String c = insertc.getText();
 					String d = insertd.getText();
 
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					JOptionPane.showMessageDialog(rootPane, insertd.getText());
 					sql = "INSERT INTO p."+prueba+" VALUES ('"+a+"','"+b+"','"+c+"','"+d+"')";
 					System.out.println("sql a insertar: "+sql);
 					guardar(sql);
@@ -1964,10 +2026,6 @@ public class Home extends JFrame implements ActionListener
 					String a = inserta.getText();
 					String b = insertb.getText();
 					String c = insertc.getText();
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
 					sql = "INSERT INTO p.persona VALUES ('"+a+"','"+b+"','"+c+"')";
 					System.out.println("sql a insertar: "+sql);
 					guardar(sql);
@@ -1975,17 +2033,13 @@ public class Home extends JFrame implements ActionListener
 				else
 				{
 					if(inserta.getText().length() == 0)
-					{
 					 JOptionPane.showMessageDialog(rootPane, "Por Favor, llenar el campo Cedula");
-					}
+
 					if (insertb.getText().length() == 0)
-					{
 					 JOptionPane.showMessageDialog(rootPane, "Por Favor, llenar el campo Nombre");
-					}
+
 					if (insertc.getText().length() == 0)
-					{
 					 JOptionPane.showMessageDialog(rootPane, "Por Favor, llenar el campo Fecha Nac.");
-					}
 				}
 
 			}
@@ -1994,20 +2048,13 @@ public class Home extends JFrame implements ActionListener
 			{
 				if ((insertb.getText().length() > 0) && (insertc.getText().length() > 0) && (insertd.getText().length() > 0) && (inserte.getText().length() > 0) && (insertf.getText().length() > 0))
 				{
-					String a = (String)insertRif.getSelectedItem();
+					String a = insertRif.getText();
 					String b = insertb.getText();
 					String c = insertc.getText();
 					String d = insertd.getText();
 					String f = inserte.getText();
 					String g = insertf.getText();
 
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, insertRif.getSelectedItem());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					JOptionPane.showMessageDialog(rootPane, insertd.getText());
-					JOptionPane.showMessageDialog(rootPane, inserte.getText());
-					JOptionPane.showMessageDialog(rootPane, insertf.getText());
 					sql = "INSERT INTO p.vende VALUES ('"+a+"','"+b+"','"+c+"',"+d+",'"+f+"',"+g+")";
 					System.out.println("sql a insertar: "+sql);
 					guardar(sql);
@@ -2042,16 +2089,7 @@ public class Home extends JFrame implements ActionListener
 					String f = inserte.getText();
 					String g = insertf.getText();
 					String h = insertg.getText();
-					String i = (String)insertRif.getSelectedItem();
-					JOptionPane.showMessageDialog(rootPane, "Los datos a ingresar son:");
-					JOptionPane.showMessageDialog(rootPane, inserta.getText());
-					JOptionPane.showMessageDialog(rootPane, insertb.getText());
-					JOptionPane.showMessageDialog(rootPane, insertc.getText());
-					JOptionPane.showMessageDialog(rootPane, insertd.getText());
-					JOptionPane.showMessageDialog(rootPane, inserte.getText());
-					JOptionPane.showMessageDialog(rootPane, insertf.getText());
-					JOptionPane.showMessageDialog(rootPane, insertg.getText());
-					JOptionPane.showMessageDialog(rootPane, insertRif.getSelectedItem());
+					String i = insertRif.getText();
 
 					sql = "INSERT INTO p.trabajador VALUES ('"+a+"','"+b+"','"+c+"','"+d+"',"+f+",'"+g+"','"+h+"','"+i+"')";
 					System.out.println("sql a insertar: "+sql);
@@ -2091,35 +2129,40 @@ public class Home extends JFrame implements ActionListener
 			String[] columnas = {"Codigo", "Nombre", "Peso", "Precio", "Tipo", "Etapa", "Trabajador de la Etapa"};
 			modelo.setColumnIdentifiers(columnas);
 			tablaConsulta1.setModel(modelo);
-			String sql = "select pmax.codigo, pmax.nombre, pmax.peso, pmax.precio, pmax.tipo, et.nombre, t.nombre from p.etapa et, p.trabajador t,p.procesa pcs,p.labora l,(select pr.codigo,pr.nombre, pr.peso, pr.precio, pr.tipo,e.rif from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron' and pr.precio = (select max(precio) from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron')) pmax where pcs.codigo = pmax.codigo and pcs.id = et.id and pcs.rif = pmax.rif and et.id = l.id and l.ci = t.ci";
+			String sql = "select pmax.codigo, pmax.nombre, pmax.peso, pmax.precio, pmax.tipo, et.nombre as etapa, t.nombre as trabajador from p.etapa et, p.trabajador t,p.procesa pcs,p.labora l,(select pr.codigo,pr.nombre, pr.peso, pr.precio, pr.tipo,e.rif from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron' and pr.precio = (select max(precio) from p.producto pr, p.procesa pc, p.empresa e where pr.codigo = pc.codigo and pc.rif = e.rif and e.tipo = 'Chocolatera' and e.nombre = 'El Cimarron')) pmax where pcs.codigo = pmax.codigo and pcs.id = et.id and pcs.rif = pmax.rif and et.id = l.id and l.ci = t.ci";
 			ResultSet st = Conexion(sql);
 			String codigo, nombre, peso, precio, tipo, nombre_e, nombre_t;
 			try
 			{
-					while(st.next())
-					{
-						codigo = st.getString("codigo");
-						nombre = st.getString("nombre");
-						peso = st.getString("peso");
-						precio = st.getString("precio");
-						tipo = st.getString("tipo");
-						nombre_e = st.getString("nombre");
-						nombre_t = st.getString("nombre");
-						modelo.addRow(new Object[]{codigo, nombre, peso, precio, tipo, nombre_e, nombre_t});
-					}
+				while(st.next())
+				{
+					codigo = st.getString("codigo");
+					nombre = st.getString("nombre");
+					peso = st.getString("peso");
+					precio = st.getString("precio");
+					tipo = st.getString("tipo");
+					nombre_e = st.getString("etapa");
+					nombre_t = st.getString("trabajador");
+					modelo.addRow(new Object[]{codigo, nombre, peso, precio, tipo, nombre_e, nombre_t});
+				}
 			}
 			catch(Exception ex)
 			{
 				int ERROR_MESSAGE = 0;
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
-			ventana = new JFrame("Tabla de la Consulta 1º");
+			ventana = new JFrame("Consulta 1º");
 			ventana.setLayout(new FlowLayout());
-			ventana.setSize(1000,500);
+			ventana.setSize(1400,500);
 			ventana.setVisible(true);
 			JScrollPane scroll = new JScrollPane(tablaConsulta1);
-			scroll.setPreferredSize(new Dimension(1000,800));
+			scroll.setPreferredSize(new Dimension(1300,70));
 			ventana.add(scroll);
+			salir = new JButton("Salir");
+			salir.setBounds(400,400,130,40);
+			salir.setForeground(Color.black);
+			ventana.getContentPane().add(salir); //agrega el boton a la ventana
+			salir.addActionListener(this);
 		}
 
     //consulta 2
@@ -2127,7 +2170,7 @@ public class Home extends JFrame implements ActionListener
 		{
 			JTable tablaConsulta2 = new JTable();
 			DefaultTableModel modelo = new DefaultTableModel();
-			String[] columnas = {"codigo", "ganancia", "estado"};
+			String[] columnas = {"Codigo", "Ganancia", "Estado"};
 			modelo.setColumnIdentifiers(columnas);
 			tablaConsulta2.setModel(modelo);
 			String sql = "select v.codigo, sum(v.costo - pro.precio * v.cantidad ) over(partition by e.estado) as ganancia, e.estado from p.vende v, p.empresa e, p.producto pro where e.tipo = 'Tienda' and  e.nombre = 'Cacao Venezolano' and v.rif = e.rif and v.fecha >= '2016-05-01' and v.fecha <= '2016-05-31' and pro.codigo = v.codigo order by v.codigo asc, ganancia desc";
@@ -2135,26 +2178,31 @@ public class Home extends JFrame implements ActionListener
 			String codigo, ganancia, estado;
 			try
 			{
-					while(st.next())
-					{
-						codigo = st.getString("codigo");
-						ganancia = st.getString("ganancia");
-						estado = st.getString("estado");
-						modelo.addRow(new Object[]{codigo,ganancia,estado});
-					}
+				while(st.next())
+				{
+					codigo = st.getString("codigo");
+					ganancia = st.getString("ganancia");
+					estado = st.getString("estado");
+					modelo.addRow(new Object[]{codigo,ganancia,estado});
+				}
 			}
 			catch(Exception ex)
 			{
 				int ERROR_MESSAGE = 0;
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
-			ventana = new JFrame("Tabla de la Consulta 1º");
+			ventana = new JFrame("Consulta 2º");
 			ventana.setLayout(new FlowLayout());
 			ventana.setSize(1000,500);
 			ventana.setVisible(true);
 			JScrollPane scroll = new JScrollPane(tablaConsulta2);
-			scroll.setPreferredSize(new Dimension(800,500));
+			scroll.setPreferredSize(new Dimension(800,70));
 			ventana.add(scroll);
+			salir = new JButton("Salir");
+			salir.setBounds(400,400,130,40);
+			salir.setForeground(Color.black);
+			ventana.getContentPane().add(salir); //agrega el boton a la ventana
+			salir.addActionListener(this);
 		}
 
     //consulta 3
@@ -2162,39 +2210,48 @@ public class Home extends JFrame implements ActionListener
     {
     	JTable tablaConsulta3 = new JTable();
 			DefaultTableModel modelo = new DefaultTableModel();
-			String[] columnas = {"codigo", "organizador", "nombre", "año", "premio", "participante", "delegado"};
+			String[] columnas = {"Codigo", "Organizador", "Nombre", "Año", "Premio", "Participante", "Delegado"};
 			modelo.setColumnIdentifiers(columnas);
 			tablaConsulta3.setModel(modelo);
-			//tablaConsulta3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			String sql = "SELECT x.codigo, x.organizador, x.nombre, x.anho, x.premio, c.participante, e.delegado FROM (SELECT codigo	FROM p.premio_conc GROUP BY codigo HAVING COUNT(*)=(SELECT MAX(COUNT(codigo)) OVER() FROM p.premio_conc GROUP BY codigo LIMIT 1)) pre, p.premio_conc x, p.concursa c, p.evento e WHERE c.codigo = pre.codigo AND e.participante = c.participante AND e.nombre = c.nombre AND e.organizador = c.organizador AND e.anho = c.anho AND x.codigo = pre.codigo";
+			String sql = "SELECT x.codigo, x.organizador, x.nombre, x.anho, x.premio, pr.participante, pr.delegado FROM (SELECT codigo FROM p.premio_conc GROUP BY codigo HAVING COUNT(*)=(SELECT MAX(COUNT(codigo)) OVER() FROM p.premio_conc GROUP BY codigo LIMIT 1)) pre, p.premio_conc x, p.concursa c, p.evento e, p.participante_ev pr WHERE x.codigo = pre.codigo and x.codigo = c.codigo and x.nombre = c.nombre and x.organizador = c.organizador and x.anho = c.anho and e.nombre = c.nombre and e.organizador = c.organizador and e.anho = c.anho and pr.participante = 'Venezuela' and pr.nombre = e.nombre and pr.organizador = e.organizador and pr.anho = e.anho";
 			ResultSet st = Conexion(sql);
 			String codigo, organizador, nombre, anho, premio, participante, delegado;
 			try
 			{
-					while(st.next())
-					{
-						codigo = st.getString("codigo");
-						organizador = st.getString("organizador");
-						nombre = st.getString("nombre");
-						anho = st.getString("anho");
-						premio = st.getString("premio");
-						participante = st.getString("participante");
-						delegado = st.getString("delegado");
-						modelo.addRow(new Object[]{codigo,organizador,nombre,anho,premio,participante,delegado});
-					}
+				while(st.next())
+				{
+					codigo = st.getString("codigo");
+					organizador = st.getString("organizador");
+					nombre = st.getString("nombre");
+					anho = st.getString("anho");
+					premio = st.getString("premio");
+					participante = st.getString("participante");
+					delegado = st.getString("delegado");
+					modelo.addRow(new Object[]{codigo,organizador,nombre,anho,premio,participante,delegado});
+				}
 			}
 			catch(Exception ex)
 			{
 				int ERROR_MESSAGE = 0;
 				JOptionPane.showMessageDialog(null, ex, "ERROR", ERROR_MESSAGE);
 			}
-			ventana = new JFrame("Tabla de la Consulta 3º");
+			ventana = new JFrame("Consulta 3º");
 			ventana.setLayout(new FlowLayout());
-			ventana.setSize(1000,500);
+			ventana.setSize(1300,500);
 			ventana.setVisible(true);
 			JScrollPane scroll = new JScrollPane(tablaConsulta3);
-			scroll.setPreferredSize(new Dimension(800,500));
+			scroll.setPreferredSize(new Dimension(1200,100));
 			ventana.add(scroll);
+			salir = new JButton("Salir");
+			salir.setBounds(400,400,130,40);
+			salir.setForeground(Color.black);
+			ventana.getContentPane().add(salir); //agrega el boton a la ventana
+			salir.addActionListener(this);
     }
+		if(e.getSource() == salir)
+		{
+			salir.setVisible(false);
+			ventana.setVisible(false);
+		}
   }
 }

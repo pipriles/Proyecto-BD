@@ -12,37 +12,6 @@ LAST_PATH = "apellidos.txt"
 SALARIO_MIN = 10000
 SALARIO_MAX = 80000
 
-jobs = [
-	'Gerente',
-	'Programador',
-	'Conserje',
-	'Empaquetador'
-	'Mensajero',
-	'Director de planta',
-	'Corredor de envios',
-	'Director de personal',
-	'Secretaria',
-	'Director de riesgos',
-	'Director de seguridad',
-	'Operador de maquinaria',
-	'Soporte tecnico'
-]
-
-rifs = [
-	'abcd',
-	'acdb',
-	'bdgs',
-	'bhgh',
-	'xyqw',
-	'swdr',
-	'juyr',
-	'cgui',
-	'acbj',
-	'plrt',
-	'vkrw',
-	'plqn'
-]
-
 def main():
 	people = {}
 	p = {}
@@ -96,6 +65,36 @@ def random_item(array):
 def random_salary():
 	return float(randint(SALARIO_MIN, SALARIO_MAX) + 2 ** (randint(0, 15)))
 
+jobs = [
+	'Gerente',
+	'Programador',
+	'Conserje',
+	'Empaquetador'
+	'Mensajero',
+	'Director de planta',
+	'Corredor de envios',
+	'Director de personal',
+	'Secretaria',
+	'Director de riesgos',
+	'Director de seguridad',
+	'Operador de maquinaria',
+	'Soporte tecnico'
+]
+
+rifs = [
+	'abcd',
+	'acdb',
+	'bdgs',
+	'bhgh',
+	'xyqw',
+	'swdr',
+	'juyr',
+	'cgui',
+	'acbj',
+	'plrt',
+	'vkrw',
+	'plqn'
+]
 
 if __name__ == '__main__':
 	main()
